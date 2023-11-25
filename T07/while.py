@@ -46,6 +46,6 @@ while input_num != -1:
         total = str(round(total, 2))
         num_list = str(num_list).replace("[", "").replace("]", "")
 
-        print(f"\nThe number you entered are {num_list} and the average numbers is {total}!\n")
+        print(f"\nThe number you entered: {num_list}.\n\nThe average numbers is {total}!\n")
         
         break
