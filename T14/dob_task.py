@@ -20,7 +20,7 @@ split_contents = []
 split_line = []
 split_details = []
 
-with open('IO Operations - Input/tasks/DOB.txt','r+', encoding='utf-8') as file: # Open the file
+with open("DOB.txt", "r+", encoding="utf-8") as file: # Open the file
 
     for line in file:                   # Iterate through the lines
 
@@ -58,22 +58,20 @@ for i in range(1, len(cleaned_list), 5):
 
 # print(firstname, lastname)
 
-www = "name"
+# DOB_dic = {k:v for k, v in zip(month, day)}
+# px_dic = {}
 
-DOB_dic = {k:v for k, v in zip(month, day)}
-px_dic = {}
+# index = 0
 
-index = 0
+# while index < len(day):
 
-while index < len(day):
-
-    all_dob = [("Day", day[index])]
+#     all_dob = [("Day", day[index])]
     
-    all_dob = dict(all_dob)
+#     all_dob = dict(all_dob)
  
-px_dic = []
+# px_dic = []
 
-kv_list = [(1, "hello"), (2, "dfvdf"), ("id", 4893829), (9, "fbff")]
+# kv_list = [(1, "hello"), (2, "dfvdf"), ("id", 4893829), (9, "fbff")]
 
 # kv_list = dict(kv_list)
 
