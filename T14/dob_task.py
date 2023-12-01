@@ -15,7 +15,7 @@ Birthdate
 
 """
 
-# Firstly, (import) was deplyed to enable external functions
+# Firstly, (import) was deployed to enable external functions
 # Empty variables will be stored
 # The (open) statemnent will fetch text from located folder
 # The (for) loop will split lines and store text to the empty variables
@@ -46,7 +46,7 @@ for item in split_line:
     if item:
         cleaned_list.append(item)
 
-#  Imperative data will be stored to the empty (list) and (dictionary) variables
+#  Data will be stored to the empty (list) and (dictionary) variables
 #  The (for) loop will iterate through the text and append each word accordingly
 #  Data will be grouped in variable and dictionary separately
 
@@ -56,9 +56,7 @@ day = []
 month = []
 year = []
 
-# px_dic = {k:v for k, v in zip(index, day)}
-
-px_names_dic = {}
+name_dic = {}
 DOB_dic = {}
 px_dic = {}
 
@@ -70,8 +68,8 @@ for i in range(1, len(cleaned_list), 5):
     month.append(cleaned_list[i+2])  
     year.append(cleaned_list[i+3])  
 
-    px_names_dic = [("First_name", firstname), ("Last_name", lastname)]
-    px_names_dic = dict(px_names_dic)
+    name_dic = [("First_name", firstname), ("Last_name", lastname)]
+    name_dic = dict(name_dic)
 
     DOB_dic = [("Day", day), ("Month", month), ("Year", year)]
     DOB_dic = dict(DOB_dic)
