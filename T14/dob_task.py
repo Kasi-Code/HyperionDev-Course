@@ -40,39 +40,31 @@ for item in split_line:
 
 # print(cleaned_list)
 
-# index = 0
-
 firstname = []
 lastname = []
 day = []
 month = []
 year = []
 
+px_names_dic = {}
+DOB_dic = {}
+px_dic = {}
+
 for i in range(1, len(cleaned_list), 5):
-    
+
     firstname.append(cleaned_list[i - 1])
     lastname.append(cleaned_list[i])
     day.append(cleaned_list[i+1])    
     month.append(cleaned_list[i+2])  
     year.append(cleaned_list[i+3])  
 
-# print(firstname, lastname)
+    px_names_dic = [("First_name", firstname), ("Last_name", lastname)]
+    px_names_dic = dict(px_names_dic)
 
-# DOB_dic = {k:v for k, v in zip(month, day)}
-# px_dic = {}
+    DOB_dic = [("Day", day), ("Month", month), ("Year", year)]
+    DOB_dic = dict(DOB_dic)
 
-# index = 0
+    # px_dic = {k:v for k, v in zip(index, day)}
 
-# while index < len(day):
-
-#     all_dob = [("Day", day[index])]
-    
-#     all_dob = dict(all_dob)
- 
-# px_dic = []
-
-# kv_list = [(1, "hello"), (2, "dfvdf"), ("id", 4893829), (9, "fbff")]
-
-# kv_list = dict(kv_list)
-
-print(month)
+print(px_names_dic)
+# print(DOB_dic)
