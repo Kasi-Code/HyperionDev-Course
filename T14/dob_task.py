@@ -12,25 +12,30 @@ Birthdate
 
 """
 
+# Firstly, (import) was deplyed to enable external functions
+# Empty variables will be stored
+# The (open) statemnent will fetch text from located folder
+# The (for) loop will split lines and store text to the empty variables
+# Then (copy) will make a copy of the text from the original
+
 import copy, re
 
-contents = ""                           # Store the contents
-copy_contents = ""
+contents = ""                 # Store the contents
+copy_contents = ""            # To maintain the original copy
 split_contents = []
 split_line = []
 split_details = []
 
 with open("IO Operations Input/tasks/DOB.txt", "r+", encoding="utf-8") as file: # Open the file
 
-    for line in file:                   # Iterate through the lines
+    for line in file:         # Iterate through the lines
 
         contents += line      # Add the contents of each line print(contents)  
 
-    # print(split_line)                     # Print the contents
-
-
 copy_contents = str(copy.deepcopy(contents.replace("\n", " ")))
 split_line += re.split(" ", copy_contents)
+
+#  Additionally, this (for) loop will clear unwanted empty item generated
 
 cleaned_list = []
 
@@ -38,13 +43,17 @@ for item in split_line:
     if item:
         cleaned_list.append(item)
 
-# print(cleaned_list)
+#  Imperative data will be stored to the empty (list) and (dictionary) variables
+#  The (for) loop will iterate through the text and append each word accordingly
+#  Data will be grouped in variable and dictionary separately
 
 firstname = []
 lastname = []
 day = []
 month = []
 year = []
+
+# px_dic = {k:v for k, v in zip(index, day)}
 
 px_names_dic = {}
 DOB_dic = {}
@@ -64,7 +73,51 @@ for i in range(1, len(cleaned_list), 5):
     DOB_dic = [("Day", day), ("Month", month), ("Year", year)]
     DOB_dic = dict(DOB_dic)
 
-    # px_dic = {k:v for k, v in zip(index, day)}
+    px_dic = [("First_name", firstname), ("Last_name", lastname), ("Day", day), ("Month", month), ("Year", year)]
+    px_dic = dict(px_dic)
 
-print(px_names_dic)
-# print(DOB_dic)
+# The (for) loop will iterate through the (dictionaries) created
+# Then, it'll generate strings for (Name) and (Birthdate) accordingly
+# Finally, data will be printed 
+
+print("\nName")
+
+for v in range(len((px_dic["First_name"]))):
+
+    FN = px_dic["First_name"][v]
+    LN = px_dic["Last_name"][v]
+
+    names = FN + " " + LN
+
+    print(names)
+
+print("\nBirthdate")
+
+for v in range(len((px_dic["First_name"]))):
+
+    DD = px_dic["Day"][v]
+    MM = px_dic["Month"][v]
+    YY = px_dic["Year"][v]
+
+    DOBs = f"{DD} {MM} {YY}"
+
+    print(DOBs)
+
+"""
+for v in range(len((px_dic["First_name"]))):
+
+    FN = px_dic["First_name"][v]
+    LN = px_dic["Last_name"][v]
+
+    DD = px_dic["Day"][v]
+    MM = px_dic["Month"][v]
+    YY = px_dic["Year"][v]
+
+    names = FN + " " + LN
+    DOBs = f"{DD} {MM} {YY}"
+
+    print(names)
+    print(DOBs)
+
+"""
+
