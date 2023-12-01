@@ -20,19 +20,29 @@ used as an attendance register, which the students will sign when they arrive at
 
 """
 
+# An empty (list) of variables for IDs
+# The (open) function will generate a new (txt) file as "a" was deployed
+# "a" allows new request to appened to an exiting txt file
+# The program will ask user for the quantity of registrar
+# Accordingly, the (for) loop will ask user for the ID - can be number and letter
+# If letter, all will turned into (uppercase) and append to the list variable
+# second (for) loop will iterate through the (list) and appened to the (txt) file
+
 ID = []
+
+file = open("reg_form.txt", "a")
 
 num_of_student = int(input("How many students are registering? "))
 
-for _ in range(num_of_student):
+for id in range(num_of_student):
 
-    student_id = int(input("Please enter the student ID number: "))
+    student_id = (input("Please enter the student ID number: ")).upper()
     ID.append(student_id)
-
-    file = open("reg_form.txt", "a")
-
-    file.write(f"{ID}")
-    file.close()
 
 print(ID)
 
+for i in range(len(ID)):
+
+    file.write(f"Student ID: {ID[i]} .................Sign\n")
+
+file.close()
