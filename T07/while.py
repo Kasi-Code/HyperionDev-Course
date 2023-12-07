@@ -41,7 +41,7 @@ while input_num != -1:
 
         # print(total, quantity, num_list)
 
-        total = (total + 1) / quantity
+        total = total / quantity
 
         total = str(round(total, 2))
         num_list = str(num_list).replace("[", "").replace("]", "")
