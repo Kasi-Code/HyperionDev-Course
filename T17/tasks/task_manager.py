@@ -6,8 +6,11 @@
 # program will look in your root directory for the text files.
 
 #=====importing libraries===========
-import os
+import copy, re, os
 from datetime import datetime, date
+
+# Functions created in different file
+from functions import reg_user 
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
@@ -70,6 +73,7 @@ while not logged_in:
         continue
     else:
         print("Login Successful!")
+        print(f"\nHello {curr_user.capitalize()}!")
         logged_in = True
 
 
@@ -87,31 +91,39 @@ e - Exit
 : ''').lower()
 
     if menu == 'r':
-        '''Add a new user to the user.txt file'''
-        # - Request input of a new username
-        new_username = input("New Username: ")
+        while True: # <-- Added loop
+            '''Add a new user to the user.txt file'''
+            # - Request input of a new username
+            new_username = input("New Username: ")
 
-        # - Request input of a new password
-        new_password = input("New Password: ")
+            new_username = reg_user(new_username) # <-- deployed function
 
-        # - Request input of password confirmation.
-        confirm_password = input("Confirm Password: ")
+            if new_username == False:
+                print("I'm sorry, this name is taken! Please try agin.")
+                break # <-- Break the loop to ask for username again
 
-        # - Check if the new password and confirmed password are the same.
-        if new_password == confirm_password:
-            # - If they are the same, add them to the user.txt file,
-            print("New user added")
-            username_password[new_username] = new_password
-            
-            with open("user.txt", "w") as out_file:
-                user_data = []
-                for k in username_password:
-                    user_data.append(f"{k};{username_password[k]}")
-                out_file.write("\n".join(user_data))
+            # - Request input of a new password
+            new_password = input("New Password: ")
 
-        # - Otherwise you present a relevant message.
-        else:
-            print("Passwords do no match")
+            # - Request input of password confirmation.
+            confirm_password = input("Confirm Password: ")
+
+            # - Check if the new password and confirmed password are the same.
+            if new_password == confirm_password:
+                # - If they are the same, add them to the user.txt file,
+                print("New user added")
+                username_password[new_username] = new_password
+                
+                with open("user.txt", "w") as out_file:
+                    user_data = []
+                    for k in username_password:
+                        user_data.append(f"{k};{username_password[k]}")
+                    out_file.write("\n".join(user_data))
+                    break # <-- Need this
+
+            # - Otherwise you present a relevant message.
+            else:
+                print("Passwords do no match")
 
     elif menu == 'a':
         '''Allow a user to add a new task to task.txt file
