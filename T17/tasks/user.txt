@@ -2,9 +2,5 @@ admin;password
 kasi;nram
 ka;nm
 helen;k
+Brithney;s
 ayumi;h
-False;
-kay;ray
-ddd;kkk
-lll;rrr
-oiu;ppp

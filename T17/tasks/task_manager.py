@@ -9,8 +9,8 @@
 import copy, re, os
 from datetime import datetime, date
 
-# Functions created in different file
-from functions import reg_user 
+# Functions created in different file: minimal code - easy for read
+from functions import reg_user, arrange_task_index # 
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
@@ -98,7 +98,7 @@ e - Exit
 
             new_username = reg_user(new_username) # <-- deployed function
 
-            if new_username == False:
+            if new_username is False:
                 print("I'm sorry, this name is taken! Please try agin.")
                 break # <-- Break the loop to ask for username again
 
@@ -199,12 +199,16 @@ e - Exit
            format of Output 2 presented in the task pdf (i.e. includes spacing
            and labelling)
         '''
-        for t in task_list:
+        # print(task_list)
+        for i,t in enumerate(task_list):
+
+            i = arrange_task_index(i) # <-- Re-arrange index for each user
+
             if t['username'] == curr_user:
-                disp_str = f"Task: \t\t {t['title']}\n"
-                disp_str += f"Assigned to: \t {t['username']}\n"
-                disp_str += f"Date Assigned: \t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
-                disp_str += f"Due Date: \t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
+                disp_str = f"Task {i[0]}: \t\t {t['title']}\n" # <-- i + 1
+                disp_str += f"Assigned to: \t\t {t['username'].capitalize()}\n"
+                disp_str += f"Date Assigned: \t\t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
+                disp_str += f"Due Date: \t\t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
                 disp_str += f"Task Description: \n {t['description']}\n"
                 print(disp_str)
                 

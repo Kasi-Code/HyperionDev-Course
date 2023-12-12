@@ -23,3 +23,15 @@ def reg_user(input_name):
             return input_name
 
 
+def arrange_task_index (i):
+    index = 0
+    index_list = []
+    index_dic = {}
+    for j in len(i):
+        index_list.append(j)
+        index_dic = [(j, index_list)]
+        index_dic = dict(index_dic)
+        index += 1
+    
+        return index_dic
+    print(index_dic)
