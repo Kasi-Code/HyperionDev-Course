@@ -193,24 +193,25 @@ e - Exit
             print(disp_str)
             
 
-
     elif menu == 'vm':
         '''Reads the task from task.txt file and prints to the console in the 
            format of Output 2 presented in the task pdf (i.e. includes spacing
            and labelling)
         '''
         # print(task_list)
+        num_index = []
         for i,t in enumerate(task_list):
-
-            i = arrange_task_index(i) # <-- Re-arrange index for each user
-
             if t['username'] == curr_user:
-                disp_str = f"Task {i[0]}: \t\t {t['title']}\n" # <-- i + 1
+                disp_str = arrange_task_index(t) # <-- Re-arrange index for each user [+1]
+                disp_str = f"Task {len(num_index)+1}: \t\t {t['title']}\n" # <-- i + 1
                 disp_str += f"Assigned to: \t\t {t['username'].capitalize()}\n"
                 disp_str += f"Date Assigned: \t\t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
                 disp_str += f"Due Date: \t\t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
                 disp_str += f"Task Description: \n {t['description']}\n"
                 print(disp_str)
+                num_index.append(t['title'])
+            
+        print(num_index)
                 
     
     elif menu == 'ds' and curr_user == 'admin': 
