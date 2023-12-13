@@ -23,10 +23,5 @@ def reg_user(input_name):
             return input_name
 
 
-def arrange_task_index (disp_str):
-    index = 0
-    user_tasks = []
-    for i in disp_str:
-        user_tasks.append(i)
-    
-    # print(user_tasks)
+def arranged_task_index(task_index):
+    print(task_index[1])

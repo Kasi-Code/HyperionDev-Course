@@ -10,7 +10,7 @@ import copy, re, os
 from datetime import datetime, date
 
 # Functions created in different file: minimal code - easy for read
-from functions import reg_user, arrange_task_index # 
+from functions import reg_user, arranged_task_index 
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
@@ -198,20 +198,19 @@ e - Exit
            format of Output 2 presented in the task pdf (i.e. includes spacing
            and labelling)
         '''
-        # print(task_list)
-        num_index = []
+        task_index = [None]
         for i,t in enumerate(task_list):
             if t['username'] == curr_user:
-                disp_str = arrange_task_index(t) # <-- Re-arrange index for each user [+1]
-                disp_str = f"Task {len(num_index)+1}: \t\t {t['title']}\n" # <-- i + 1
+                disp_str = f"Task {len(task_index)}: \t\t {t['title']}\n"
                 disp_str += f"Assigned to: \t\t {t['username'].capitalize()}\n"
                 disp_str += f"Date Assigned: \t\t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
                 disp_str += f"Due Date: \t\t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
                 disp_str += f"Task Description: \n {t['description']}\n"
-                print(disp_str)
-                num_index.append(t['title'])
+                task_index.append(disp_str)
+                # print(disp_str)
             
-        # print(num_index)
+        # print(task_index[1])
+        arranged_task_index(task_index) # <-- Re-arranged index task(s) for each user
                 
     
     elif menu == 'ds' and curr_user == 'admin': 
