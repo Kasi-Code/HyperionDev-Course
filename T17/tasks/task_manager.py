@@ -211,7 +211,7 @@ e - Exit
                 print(disp_str)
                 num_index.append(t['title'])
             
-        print(num_index)
+        # print(num_index)
                 
     
     elif menu == 'ds' and curr_user == 'admin': 
