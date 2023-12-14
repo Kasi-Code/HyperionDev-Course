@@ -24,4 +24,9 @@ def reg_user(input_name):
 
 
 def arranged_task_index(task_index):
-    print(task_index[1])
+    tasks_dic = {}
+    # x = slice(1,)
+    for i,t in enumerate(task_index):
+        tasks_dic = {i:t}
+    
+        print(tasks_dic(0))
