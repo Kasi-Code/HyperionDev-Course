@@ -209,7 +209,7 @@ e - Exit
                 task_index.append(disp_str)
                 # print(disp_str)
             
-        # print(task_index[1])
+        print(task_index[1])
         arranged_task_index(task_index) # <-- Re-arranged index task(s) for each user
                 
     
