@@ -211,6 +211,12 @@ e - Exit
             
         # print(task_index[1])
         arranged_task_index(task_index) # <-- Re-arranged index task(s) for each user
+        specific_task = input('''Select one of the following Options below:
+    -1 - Return to the main menu
+    tc - Mark the task as complete
+    et - Edit the task
+    e - Exit
+    : ''').lower()
                 
     
     elif menu == 'ds' and curr_user == 'admin': 
