@@ -1,4 +1,5 @@
 import copy, re
+from datetime import datetime
 
 def reg_user(input_name):
     with open("user.txt", "r") as username_pass_list:
@@ -25,25 +26,29 @@ def reg_user(input_name):
 
 def arranged_task_index(task_index):
     tasks_dic = {}
-    for i,t in enumerate(task_index):
-        tasks_dic.update({i:t}) 
-    
-    # print(tasks_dic)
+    for i, t in enumerate(task_index):
+        tasks_dic.update({i: t})
 
+    # Create a list to store tuples of (task_key, due_date)
+    task_due_dates = []
+
+    # Extract due dates and convert them to datetime objects
     for key, value in tasks_dic.items():
         if key > 0:
             tasks = value
-            due_date = value[85:95]
-            # print(f"{key}: {value}")
-            
-            num_dic = {0: 123, 1: 5, 2: 6, 3: 75}
-            sorted_items = sorted(num_dic.items(), key=lambda x: x[1])
-            sorted_dic = dict(sorted_items)
+            due_date_str = tasks.find("Due Date:")
+            sliced_date = slice(due_date_str + 13, due_date_str + 23)
+            grab_due_date = tasks[sliced_date]
+            due_date_obj = datetime.strptime(grab_due_date, "%Y-%m-%d")
+            task_due_dates.append((key, due_date_obj))
 
-            # print(sorted_dic)
+    # Sort tasks based on due dates
+    sorted_tasks = sorted(task_due_dates, key=lambda x: x[1])
 
-            print(f"{tasks}")
+    print(f"\nHere are your task(s) - please find the shortest due-date starting from the top!\n") 
 
-    # filtered_dict = {key: value for key, value in tasks_dic.items() if key > 0}
+    # Print tasks in sorted order
+    for task_key, _ in sorted_tasks:
+        print(tasks_dic[task_key])
 
-    # print(filtered_dict)
+    print(f"\nHere are your task(s) - please find the shortest due-date starting from the top!\n") 
