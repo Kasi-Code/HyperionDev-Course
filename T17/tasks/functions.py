@@ -38,8 +38,8 @@ def arranged_task_index(task_index):
             tasks = value
             due_date_str = tasks.find("Due Date:")
             sliced_date = slice(due_date_str + 13, due_date_str + 23)
-            grab_due_date = tasks[sliced_date]
-            due_date_obj = datetime.strptime(grab_due_date, "%Y-%m-%d")
+            grabbed_due_date = tasks[sliced_date]
+            due_date_obj = datetime.strptime(grabbed_due_date, "%Y-%m-%d")
             task_due_dates.append((key, due_date_obj))
 
     # Sort tasks based on due dates
@@ -52,3 +52,17 @@ def arranged_task_index(task_index):
         print(tasks_dic[task_key])
 
     print(f"\nHere are your task(s) - please find the shortest due-date starting from the top!\n") 
+
+# def get_tasks_file(_):
+#     with open("tasks.txt", 'r') as task_file:
+#     task_data = task_file.read().split("\n")
+#     task_data = [t for t in task_data if t != ""]
+
+def marked_task(status):
+    task_list = []
+    with open("tasks.txt", 'r+') as task_file:
+        for t in task_file:
+
+    # task_data = task_file.read().split("\n")
+    # task_data = [t for t in task_data if t != ""]
+            print(t)

@@ -10,7 +10,7 @@ import copy, re, os
 from datetime import datetime, date
 
 # Functions created in different file: minimal code - easy for read
-from functions import reg_user, arranged_task_index 
+from functions import reg_user, arranged_task_index, marked_task#, get_tasks_file 
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
@@ -99,7 +99,7 @@ e - Exit
             new_username = reg_user(new_username) # <-- deployed function
 
             if new_username is False:
-                print("I'm sorry, this name is taken! Please try agin.")
+                print("\nI'm sorry, this name is taken! Please try agin.")
                 break # <-- Break the loop to ask for username again
 
             # - Request input of a new password
@@ -177,6 +177,7 @@ e - Exit
             task_file.write("\n".join(task_list_to_write))
         print("Task successfully added.")
 
+    # open_tasks_file = get_tasks_file()
 
     elif menu == 'va':
         '''Reads the task from task.txt file and prints to the console in the 
@@ -189,6 +190,8 @@ e - Exit
             disp_str += f"Assigned to: \t {t['username']}\n"
             disp_str += f"Date Assigned: \t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
             disp_str += f"Due Date: \t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
+            # Missing
+            disp_str += f"Completed: \t {"Yes" if t['completed'] else "No"}\n" 
             disp_str += f"Task Description: \n {t['description']}\n"
             print(disp_str)
             
@@ -205,19 +208,34 @@ e - Exit
                 disp_str += f"Assigned to: \t\t {t['username'].capitalize()}\n"
                 disp_str += f"Date Assigned: \t\t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
                 disp_str += f"Due Date: \t\t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
+                disp_str += f"Completed: \t\t {"Yes" if t['completed'] else "No"}\n" # <-- Missing
                 disp_str += f"Task Description: \n {t['description']}\n"
                 task_index.append(disp_str)
-                # print(disp_str)
-            
-        # print(task_index[1])
-        arranged_task_index(task_index) # <-- Re-arranged index task(s) for each user
-        specific_task = input('''Select one of the following Options below:
-    -1 - Return to the main menu
-    tc - Mark the task as complete
-    et - Edit the task
-    e - Exit
-    : ''').lower()
-                
+
+        # Re-arranged index task(s) for each user        
+        arranged_task_index(task_index) 
+
+        while True:
+            specific_task = input('''Select one of the following Options below:
+        -1 - Return to the main menu
+        tc - Mark the task as complete
+        et - Edit the task
+        : ''').lower()
+            if specific_task == "-1":
+                break        
+            elif specific_task == "tc":
+                num_of_index = []
+                for i in range(len(task_index)):
+                    if i > 0:
+                        num_of_index.append(i)
+                        
+                task_status = input(f"\nWhich task: {', '.join(map(str, num_of_index))}? ").lower()
+                print("\n")
+
+                marked_task(task_status)
+            # elif specific_task == et:
+            else: 
+                print("\nThat's not an option! Please try again: \n")   
     
     elif menu == 'ds' and curr_user == 'admin': 
         '''If the user is an admin they can display statistics about number of users
