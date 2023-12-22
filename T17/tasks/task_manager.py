@@ -10,7 +10,7 @@ import copy, re, os
 from datetime import datetime, date
 
 # Functions created in different file: minimal code - easy for read
-from functions import reg_user, view_edit_task # marked_task, get_tasks_file 
+from functions import reg_user, view_edit_task#, marked_task#, get_tasks_file 
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
@@ -213,10 +213,11 @@ e - Exit
                 task_index.append(disp_str)
 
         # Re-arranged index task(s) for each user        
-        task_result = view_edit_task(task_index) 
+        task_result = view_edit_task(task_index)
 
         if task_result != False:
             while True:
+                # print(task_result)
                 specific_task = input('''Select one of the following Options below:
             -1 - Return to the main menu
             tc - Mark the task as complete
@@ -226,14 +227,32 @@ e - Exit
                     break        
                 elif specific_task == "tc":
                     num_of_index = []
-                    for i in range(len(task_index)):
+                    all_tasks = []
+                    selected_task = []
+                    for i in range(len(task_result)):
                         if i > 0:
                             num_of_index.append(i)
                             
-                    task_status = input(f"\nWhich task: {', '.join(map(str, num_of_index))}? ").lower()
+                    task_num = int(input(f"\nWhich task: {', '.join(map(str, num_of_index))}? "))
                     print("\n")
+                    for k,v in task_result.items():
+                        if k > 0:
+                            all_tasks.append(v)
 
-                    view_edit_task(int(task_status)) 
+                    for task in all_tasks:
+                        if str(f"Task {task_num}") in task:
+                            print(task)
+
+
+                    
+
+
+                    # with open("tasks.txt", "r") as tasks_list:
+                    #     for task in tasks_list:
+                    #         print(task)
+                            # print()
+
+                    # view_edit_task(int(task_status)) 
                     # marked_task(task_status)
                 # elif specific_task == et:
                 else: 

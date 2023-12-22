@@ -53,12 +53,12 @@ def view_edit_task(user_choice):
                 print(tasks_dic[task_key])
 
             print("\nHere are your task(s) - please find the shortest due-date starting from the top!\n")
-            return True
+            return tasks_dic
         else:
             print("\nYou do not have any task.\n")
             return False
     else:
-        print("Coming...")
+        print(tasks_dic)
 
     
 # def get_tasks_file(_):
@@ -72,6 +72,6 @@ def view_edit_task(user_choice):
 #         for t in task_file:
 #             for j in t:
 
-    # task_data = task_file.read().split("\n")
-    # task_data = [t for t in task_data if t != ""]
-                # print(j[0])
+#     task_data = task_file.read().split("\n")
+#     task_data = [t for t in task_data if t != ""]
+#                 print(j[0])
