@@ -10,7 +10,7 @@ import copy, re, os
 from datetime import datetime, date
 
 # Functions created in different file: minimal code - easy for read
-from functions import reg_user, arranged_task_index, marked_task#, get_tasks_file 
+from functions import reg_user, view_edit_task # marked_task, get_tasks_file 
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
@@ -213,7 +213,7 @@ e - Exit
                 task_index.append(disp_str)
 
         # Re-arranged index task(s) for each user        
-        task_result = arranged_task_index(task_index) 
+        task_result = view_edit_task(task_index) 
 
         if task_result != False:
             while True:
@@ -233,7 +233,8 @@ e - Exit
                     task_status = input(f"\nWhich task: {', '.join(map(str, num_of_index))}? ").lower()
                     print("\n")
 
-                    marked_task(task_status)
+                    view_edit_task(int(task_status)) 
+                    # marked_task(task_status)
                 # elif specific_task == et:
                 else: 
                     print("\nThat's not an option! Please try again: \n")   
