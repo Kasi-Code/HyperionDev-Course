@@ -53,9 +53,10 @@ def arranged_task_index(task_index):
             print(tasks_dic[task_key])
 
         print("\nHere are your task(s) - please find the shortest due-date starting from the top!\n")
+        return True
     else:
         print("\nYou do not have any task.\n")
-        return None
+        return False
     
 
 # def get_tasks_file(_):

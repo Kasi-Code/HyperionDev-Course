@@ -213,9 +213,9 @@ e - Exit
                 task_index.append(disp_str)
 
         # Re-arranged index task(s) for each user        
-        tasks_result = arranged_task_index(task_index) 
+        task_result = arranged_task_index(task_index) 
 
-        if tasks_result != None:
+        if task_result != False:
             while True:
                 specific_task = input('''Select one of the following Options below:
             -1 - Return to the main menu
