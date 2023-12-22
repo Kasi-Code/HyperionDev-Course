@@ -42,16 +42,21 @@ def arranged_task_index(task_index):
             due_date_obj = datetime.strptime(grabbed_due_date, "%Y-%m-%d")
             task_due_dates.append((key, due_date_obj))
 
-    # Sort tasks based on due dates
-    sorted_tasks = sorted(task_due_dates, key=lambda x: x[1])
+    if task_due_dates:
+        # Sort tasks based on due dates
+        sorted_tasks = sorted(task_due_dates, key=lambda x: x[1])
 
-    print(f"\nHere are your task(s) - please find the shortest due-date starting from the top!\n") 
+        print("\nHere are your task(s) - please find the shortest due-date starting from the top!\n")
 
-    # Print tasks in sorted order
-    for task_key, _ in sorted_tasks:
-        print(tasks_dic[task_key])
+        # Print tasks in sorted order
+        for task_key, _ in sorted_tasks:
+            print(tasks_dic[task_key])
 
-    print(f"\nHere are your task(s) - please find the shortest due-date starting from the top!\n") 
+        print("\nHere are your task(s) - please find the shortest due-date starting from the top!\n")
+    else:
+        print("\nYou do not have any task.\n")
+        return None
+    
 
 # def get_tasks_file(_):
 #     with open("tasks.txt", 'r') as task_file:

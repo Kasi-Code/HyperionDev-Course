@@ -213,29 +213,37 @@ e - Exit
                 task_index.append(disp_str)
 
         # Re-arranged index task(s) for each user        
-        arranged_task_index(task_index) 
+        tasks_result = arranged_task_index(task_index) 
 
-        while True:
-            specific_task = input('''Select one of the following Options below:
-        -1 - Return to the main menu
-        tc - Mark the task as complete
-        et - Edit the task
-        : ''').lower()
-            if specific_task == "-1":
-                break        
-            elif specific_task == "tc":
-                num_of_index = []
-                for i in range(len(task_index)):
-                    if i > 0:
-                        num_of_index.append(i)
-                        
-                task_status = input(f"\nWhich task: {', '.join(map(str, num_of_index))}? ").lower()
-                print("\n")
+        if tasks_result != None:
+            while True:
+                specific_task = input('''Select one of the following Options below:
+            -1 - Return to the main menu
+            tc - Mark the task as complete
+            et - Edit the task
+            : ''').lower()
+                if specific_task == "-1":
+                    break        
+                elif specific_task == "tc":
+                    num_of_index = []
+                    for i in range(len(task_index)):
+                        if i > 0:
+                            num_of_index.append(i)
+                            
+                    task_status = input(f"\nWhich task: {', '.join(map(str, num_of_index))}? ").lower()
+                    print("\n")
 
-                marked_task(task_status)
-            # elif specific_task == et:
-            else: 
-                print("\nThat's not an option! Please try again: \n")   
+                    marked_task(task_status)
+                # elif specific_task == et:
+                else: 
+                    print("\nThat's not an option! Please try again: \n")   
+        else:
+            while True:
+                specific_task = input("Type -1 to return to the main menu: ").lower()
+                if specific_task == "-1":
+                    break
+                else: 
+                    print("\nThat's not an option! Please try again: \n") 
     
     elif menu == 'ds' and curr_user == 'admin': 
         '''If the user is an admin they can display statistics about number of users
