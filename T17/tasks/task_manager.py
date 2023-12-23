@@ -282,15 +282,7 @@ e - Exit
 
                                 with open("tasks.txt", "w") as tasks_file:
                                     tasks_file.writelines(tasks_from_file)
-                        
-
-
-                                # else: 
-                                #     break
-
-                    # print(tasks_from_file)
-
-                    # view_edit_task(int(task_status)) 
+                    """Created new branch"""
                     # marked_task(task_status)
                 # elif specific_task == et:
                 else: 
