@@ -228,7 +228,7 @@ e - Exit
                 elif specific_task == "tc":
                     num_of_index = []
                     all_tasks = []
-                    selected_task = []
+                    selected_task = {}
                     for i in range(len(task_result)):
                         if i > 0:
                             num_of_index.append(i)
@@ -241,16 +241,41 @@ e - Exit
 
                     for task in all_tasks:
                         if str(f"Task {task_num}") in task:
-                            print(task)
+                            start_index = 11
+                            end_index = task.find("Assigned to:")
 
+                            sliced_task_description = slice(start_index, end_index - 1)
+                            sliced_assigned_name = slice(end_index + 16, end_index + 20)
 
+                            selected_task["description"] = task[sliced_task_description]
+                            selected_task["name"] = task[sliced_assigned_name]
+
+                            # print(task)
+                        
+                    # print(selected_task)
                     
+                    tasks_from_file = []
+                    answer = ""
+                    with open("tasks.txt", "r+") as tasks_file:
+                        for task in tasks_file:
+                            tasks_from_file.append(task)
 
+                        for index, strings in enumerate(tasks_from_file):
+                            if selected_task["name"] and selected_task["description"] in strings:
+                                print(strings)
+                                answer = input("You will not be able to edit the task once marked as completed!\nAre you sure? (Y / N): ").lower()
+                                if answer == "y":
+                                    tasks_from_file[index] = strings.replace("No", "Yes")
+                                else:
+                                    break
 
-                    # with open("tasks.txt", "r") as tasks_list:
-                    #     for task in tasks_list:
-                    #         print(task)
-                            # print()
+                        with open("tasks.txt", "w") as tasks_file:
+                            tasks_file.writelines(tasks_from_file)
+
+                                # else: 
+                                #     break
+
+                    # print(tasks_from_file)
 
                     # view_edit_task(int(task_status)) 
                     # marked_task(task_status)
