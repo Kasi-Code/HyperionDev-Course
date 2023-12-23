@@ -262,8 +262,8 @@ e - Exit
 
                         for index, strings in enumerate(tasks_from_file):
                             if selected_task["name"] and selected_task["description"] in strings:
-                                print(strings)
-                                answer = input("You will not be able to edit the task once marked as completed!\nAre you sure? (Y / N): ").lower()
+                                # print(strings)
+                                answer = input("You will not be able to edit the task once marked as completed!\n\nAre you sure? (Y / N): ").lower()
                                 if answer == "y":
                                     tasks_from_file[index] = strings.replace("No", "Yes")
                                 else:
