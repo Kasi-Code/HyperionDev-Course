@@ -10,7 +10,7 @@ import copy, re, os
 from datetime import datetime, date
 
 # Functions created in different file: minimal code - easy for read
-from functions import reg_user, view_edit_task#, marked_task#, get_tasks_file 
+from functions import reg_user, view_edit_task#,load_tasks, update_task_status, marked_task#, get_tasks_file 
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
@@ -214,6 +214,7 @@ e - Exit
 
         # Re-arranged index task(s) for each user        
         task_result = view_edit_task(task_index)
+        # print(f"TASK_RESULT IS {type()}")
 
         if task_result != False:
             while True:
@@ -260,7 +261,7 @@ e - Exit
                             break
                     else:
                         print("That's not one of the tasks!\n")
-                        selected_task = None  # Initialise an empty dictionary if the conditions are not met
+                        selected_task = None
 
                     tasks_from_file = []
                     answer = ""
@@ -268,7 +269,7 @@ e - Exit
                         for task in tasks_file:
                             tasks_from_file.append(task)
 
-                        while selected_task != None:
+                        if selected_task != None:
                             for index, strings in enumerate(tasks_from_file):
                                 if selected_task["name"] and selected_task["description"] in strings:
                                     answer = input(f"You will not be able to edit task {task_num} once marked as completed!\n\nAre you sure? (Y / N): ").lower()
@@ -277,7 +278,7 @@ e - Exit
                                     elif answer == "n":
                                         break
                                     else:
-                                        print("That's not one of the options!")
+                                        print("\nThat's not one of the options!\n")
 
                                 with open("tasks.txt", "w") as tasks_file:
                                     tasks_file.writelines(tasks_from_file)
