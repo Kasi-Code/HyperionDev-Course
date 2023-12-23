@@ -217,60 +217,72 @@ e - Exit
 
         if task_result != False:
             while True:
-                # print(task_result)
-                specific_task = input('''Select one of the following Options below:
-            -1 - Return to the main menu
-            tc - Mark the task as complete
-            et - Edit the task
-            : ''').lower()
+                specific_task = input('''Select one of the following options below:
+                    -1 - Return to the main menu
+                    tc - Mark the task as complete
+                    et - Edit the task
+                    : ''').lower()
+
                 if specific_task == "-1":
-                    break        
+                    break
                 elif specific_task == "tc":
                     num_of_index = []
                     all_tasks = []
                     selected_task = {}
+
                     for i in range(len(task_result)):
                         if i > 0:
                             num_of_index.append(i)
-                            
+
                     task_num = int(input(f"\nWhich task: {', '.join(map(str, num_of_index))}? "))
                     print("\n")
-                    for k,v in task_result.items():
+
+                    for k, v in task_result.items():
                         if k > 0:
                             all_tasks.append(v)
 
                     for task in all_tasks:
-                        if str(f"Task {task_num}") in task:
-                            start_index = 11
-                            end_index = task.find("Assigned to:")
+                        if str(f"Task {task_num}:") in task and "No" in task:
+                            start_index_description = 11
+                            end_index_description = task.find("Assigned to:") - 1
+                            start_index_name = end_index_description + 17
+                            end_index_name = end_index_description + 21
 
-                            sliced_task_description = slice(start_index, end_index - 1)
-                            sliced_assigned_name = slice(end_index + 16, end_index + 20)
+                            sliced_task_description = slice(start_index_description, end_index_description)
+                            sliced_assigned_name = slice(start_index_name, end_index_name)
 
                             selected_task["description"] = task[sliced_task_description]
                             selected_task["name"] = task[sliced_assigned_name]
+                            break
+                        elif str(f"Task {task_num}:") in task and "Yes" in task:
+                            print(f"You've completed task {task_num}!\n")
+                            selected_task = None
+                            break
+                    else:
+                        print("That's not one of the tasks!\n")
+                        selected_task = None  # Initialise an empty dictionary if the conditions are not met
 
-                            # print(task)
-                        
-                    # print(selected_task)
-                    
                     tasks_from_file = []
                     answer = ""
                     with open("tasks.txt", "r+") as tasks_file:
                         for task in tasks_file:
                             tasks_from_file.append(task)
 
-                        for index, strings in enumerate(tasks_from_file):
-                            if selected_task["name"] and selected_task["description"] in strings:
-                                # print(strings)
-                                answer = input("You will not be able to edit the task once marked as completed!\n\nAre you sure? (Y / N): ").lower()
-                                if answer == "y":
-                                    tasks_from_file[index] = strings.replace("No", "Yes")
-                                else:
-                                    break
+                        while selected_task != None:
+                            for index, strings in enumerate(tasks_from_file):
+                                if selected_task["name"] and selected_task["description"] in strings:
+                                    answer = input(f"You will not be able to edit task {task_num} once marked as completed!\n\nAre you sure? (Y / N): ").lower()
+                                    if answer == "y":
+                                        tasks_from_file[index] = strings.replace("No", "Yes")
+                                    elif answer == "n":
+                                        break
+                                    else:
+                                        print("That's not one of the options!")
 
-                        with open("tasks.txt", "w") as tasks_file:
-                            tasks_file.writelines(tasks_from_file)
+                                with open("tasks.txt", "w") as tasks_file:
+                                    tasks_file.writelines(tasks_from_file)
+                        
+
 
                                 # else: 
                                 #     break
