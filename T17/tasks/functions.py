@@ -34,13 +34,14 @@ def view_edit_task(user_choice):
 
         # Extract due dates and convert them to datetime objects
         for key, value in tasks_dic.items():
-            if key > 0:
-                tasks = value
-                due_date_str = tasks.find("Due Date:")
-                sliced_date = slice(due_date_str + 13, due_date_str + 23)
-                grabbed_due_date = tasks[sliced_date]
-                due_date_obj = datetime.strptime(grabbed_due_date, "%Y-%m-%d")
-                task_due_dates.append((key, due_date_obj))
+            if key == 0:
+                continue
+            tasks = value
+            due_date_str = tasks.find("Due Date:")
+            sliced_date = slice(due_date_str + 13, due_date_str + 23)
+            grabbed_due_date = tasks[sliced_date]
+            due_date_obj = datetime.strptime(grabbed_due_date, "%Y-%m-%d")
+            task_due_dates.append((key, due_date_obj))
 
         if task_due_dates:
             # Sort tasks based on due dates
