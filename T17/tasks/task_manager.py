@@ -25,7 +25,6 @@ with open("tasks.txt", 'r') as task_file:
 
 
 task_list = []
-print(f"TASK LIST: {task_list}")
 for t_str in task_data:
     curr_t = {}
 
@@ -114,7 +113,7 @@ while True:
                 # - If they are the same, add them to the user.txt file,
                 print("New user added")
                 username_password[new_username] = new_password
-                
+
                 with open("user.txt", "w") as out_file:
                     user_data = []
                     for k in username_password:
@@ -178,8 +177,6 @@ while True:
             task_file.write("\n".join(task_list_to_write))
         print("Task successfully added.")
 
-    # open_tasks_file = get_tasks_file()
-
     elif menu == 'va':
         '''Reads the task from task.txt file and prints to the console in the 
            format of Output 2 presented in the task pdf (i.e. includes spacing
@@ -192,17 +189,18 @@ while True:
             disp_str += f"Date Assigned: \t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
             disp_str += f"Due Date: \t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
             # Missing
-            disp_str += f"Completed: \t {"Yes" if t['completed'] else "No"}\n" 
+            disp_str += f"Completed: \t {'Yes' if t['completed'] else 'No'}\n"
             disp_str += f"Task Description: \n {t['description']}\n"
             print(disp_str)
-            
+
 
     elif menu == 'vm':
         '''Reads the task from task.txt file and prints to the console in the 
            format of Output 2 presented in the task pdf (i.e. includes spacing
            and labelling)
         '''
-        # curr_user_task = [None]
+      
+        # Display all tasks
         curr_user_task_list = []
         for i,t in enumerate(task_list):
             if t['username'] == curr_user:
@@ -210,19 +208,14 @@ while True:
                 disp_str += f"Assigned to: \t\t {t['username'].capitalize()}\n"
                 disp_str += f"Date Assigned: \t\t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
                 disp_str += f"Due Date: \t\t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
-                disp_str += f"Completed: \t\t {"Yes" if t['completed'] else "No"}\n" # <-- Missing
+                disp_str += f"Completed: \t {'Yes' if t['completed'] else 'No'}\n" # <-- Missing
                 disp_str += f"Task Description: \n {t['description']}\n"
-                print(f"FIRST PRINT {disp_str}")
-                # curr_user_task.append(disp_str)
+                print(f"{disp_str}")
                 curr_user_task_list.append(t)
 
         num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
-        # selected_task = 0
-        
-        # print(curr_user_task)
-        # print(f"CURR USER LIST OF TASK {curr_user_task_list}\n\n")
-        # print(f"ALL LIST OF TASK {task_list}")
-    
+        print(f"NUM OF INDEX: {num_of_index}")
+
         while True:
             specific_task = input('''Select one of the following options below:
     -1 - Return to the main menu
@@ -233,43 +226,79 @@ while True:
             if specific_task == "-1":
                 break
             elif specific_task == "tc":
-                while True:
-                    task_num = input(f"""\nTask: {', '.join(map(str, num_of_index))}.\n\nWhich task have you completed? """)
-                    print()
+                task_num = input(f"""\nTask: {', '.join(map(str, num_of_index))}.\n\nWhich task have you completed? """)
+                print()
 
-                    try:
-                        task_num = int(task_num)
-                        if task_num < 1 or task_num >= len(num_of_index):
-                            print("Invalid task number. Please enter a valid task number.\n")
-                            break
-                    except ValueError:
-                        print("Invalid input. Please enter a valid task number.\n")
+                try:
+                    task_num = int(task_num)
+                    if task_num < 1 or task_num > len(num_of_index):
+                        print("Invalid task number. Please enter a valid task number.\n")
                         break
+                except ValueError:
+                    print("Invalid input. Please enter a valid task number.\n")
+                    break
 
-                    selected_task = curr_user_task_list[task_num - 1]
-                    found_task = False  # Flag to track if the condition is met
-                    print(f"SELECTED TASK: {selected_task}")
-                    # print(f"ORIGINA LIST: {task_list}")
+                selected_task = curr_user_task_list[task_num - 1]
 
-                    with open("tasks.txt", "r+") as task_file:
-                        task_list_to_write = []
-                        for task in task_file:
-                            print(f"OPENED FROM FILE: {task}")
-                            if selected_task == task and task["completed"]:
-                                print(selected_task)
-                                print(f"Task {task_num} is already completed.")
-                                found_task = True  # Set the flag to True
-                                break
-                            elif selected_task == task and not task["completed"]:
-                                answer = input(f"Mark task {task_num} as complete? (Y / N): ").lower()
-                                if answer == "y":
-                                    task['completed'] = True
-                                    print(f"\nTask {task_num} marked as complete.")
-                                    print(f"MATCHED TASK: {task}")
-                                    break
-                                elif answer == "n":
-                                    print(f"\nTask {task_num} not marked as complete.")
-                                    break
+                # complete_task = {
+                #     "completed": False
+                # }
+
+                found_task = False  # Flag to track if the condition is met
+                with open("tasks.txt", "r+") as task_file:
+                    task_list_to_write = []
+                    str_attrs = []
+                    for t in task_list:
+                        if selected_task["username"] == t["username"] and selected_task["title"] ==  t["title"] and t["completed"]:
+                          print(f"Task {task_num} is already completed.\n")
+                          found_task = True  # Set the flag to True
+                          break
+                        elif selected_task["username"] == t["username"] and selected_task["title"] ==  t["title"] and not t["completed"]:
+                            answer = input(f"NOTE: You will not be able to edit this task once marked as completed! \n\nMark task {task_num} as complete? (Y / N): ").lower()
+                            if answer == "y":
+                              t['completed'] = True
+                              str_attrs = [
+                                "Yes" if t['completed'] else "No"
+                              ]
+                              task_file.write(t.replace(t["completed"], str_attrs))
+                              print(f"\nTask {task_num} marked as complete.")
+                              print()
+                              break
+                            elif answer == "n":
+                              print(f"\nTask {task_num} not marked as complete.")
+                              print()
+                              break
+                            else:
+                              print("Invalid input. Please enter 'Y' or 'N'.")
+                              print()
+                              break
+                        # print(t['username'])
+                        
+                        # task_list_to_write.append(";".join(str_attrs))
+
+                    # with open("tasks.txt", "w") as task_file:
+                        # task_file.write(t.replace(t["completed"], str_attrs))
+                # print("Task successfully added.")
+
+                    # with open("tasks.txt", "r+") as task_file:
+                    #     task_list_to_write = []
+                    #     for task in task_file:
+                    #         print(f"OPENED FROM FILE: {task}")
+                    #         if selected_task == task and task["completed"]:
+                    #             print(selected_task)
+                    #             print(f"Task {task_num} is already completed.")
+                    #             found_task = True  # Set the flag to True
+                    #             break
+                    #         elif selected_task == task and not task["completed"]:
+                    #             answer = input(f"Mark task {task_num} as complete? (Y / N): ").lower()
+                    #             if answer == "y":
+                    #                 task['completed'] = True
+                    #                 print(f"\nTask {task_num} marked as complete.")
+                    #                 print(f"MATCHED TASK: {task}")
+                    #                 break
+                    #             elif answer == "n":
+                    #                 print(f"\nTask {task_num} not marked as complete.")
+                    #                 break
                         #     str_attrs = [
                         #         t['username'],
                         #         t['title'],
@@ -280,9 +309,9 @@ while True:
                         #     ]
                         #     task_list_to_write.append(";".join(str_attrs))
                         # task_file.write("\n".join(task_list_to_write))
-                    
+
                     # for task in task_list:
-                        
+
 
             """
 
@@ -346,7 +375,7 @@ while True:
                 else: 
                     print("\nThat's not an option! Please try again: \n") 
                     """
-    
+
     elif menu == 'ds' and curr_user == 'admin': 
         '''If the user is an admin they can display statistics about number of users
             and tasks.'''
