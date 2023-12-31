@@ -38,7 +38,7 @@ for t_str in task_data:
     curr_t['completed'] = True if task_components[5] == "Yes" else False
 
     task_list.append(curr_t)
-
+# print(f"ORIGINAL TASK LIST: {task_list}")
 
 #====Login Section====
 '''This code reads usernames and password from the user.txt file to 
@@ -204,14 +204,24 @@ while True:
         curr_user_task_list = []
         for i,t in enumerate(task_list):
             if t['username'] == curr_user:
-                disp_str = f"Task {len(curr_user_task_list) + 1}: \t\t {t['title']}\n"
-                disp_str += f"Assigned to: \t\t {t['username'].capitalize()}\n"
-                disp_str += f"Date Assigned: \t\t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
-                disp_str += f"Due Date: \t\t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
-                disp_str += f"Completed: \t {'Yes' if t['completed'] else 'No'}\n" # <-- Missing
-                disp_str += f"Task Description: \n {t['description']}\n"
-                print(f"{disp_str}")
-                curr_user_task_list.append(t)
+                if "%Y-%m-%d" in task_list:
+                    disp_str = f"Task {len(curr_user_task_list) + 1}: \t\t {t['title']}\n"
+                    disp_str += f"Assigned to: \t\t {t['username'].capitalize()}\n"
+                    disp_str += f"Date Assigned: \t\t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
+                    disp_str += f"Due Date: \t\t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
+                    disp_str += f"Completed: \t {'Yes' if t['completed'] else 'No'}\n" # <-- Missing
+                    disp_str += f"Task Description: \n {t['description']}\n"
+                    print(f"{disp_str}")
+                    curr_user_task_list.append(t)
+                else:
+                    disp_str = f"Task {len(curr_user_task_list) + 1}: \t\t {t['title']}\n"
+                    disp_str += f"Assigned to: \t\t {t['username'].capitalize()}\n"
+                    disp_str += f"Date Assigned: \t\t {t['assigned_date']}\n"
+                    disp_str += f"Due Date: \t\t {t['due_date']}\n"
+                    disp_str += f"Completed: \t {'Yes' if t['completed'] else 'No'}\n" # <-- Missing
+                    disp_str += f"Task Description: \n {t['description']}\n"
+                    print(f"{disp_str}")
+                    curr_user_task_list.append(t)
 
         num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
 
@@ -292,7 +302,7 @@ while True:
                         task_file.write(f"{t['username']};{t['title']};{t['description']};{t['due_date']};{t['assigned_date']};{'Yes' if t['completed'] else 'No'}\n")
 
                 # Refresh curr_user_task_list after marking a task as complete
-                curr_user_task_list = [t for t in task_list_txt if t['username'] == curr_user]
+                task_list = [t for t in task_list_txt if t['username'] == curr_user]
                 num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
                         
     elif menu == 'ds' and curr_user == 'admin': 
