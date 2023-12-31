@@ -10,7 +10,7 @@ import copy, re, os
 from datetime import datetime, date
 
 # Functions created in different file: minimal code - easy for read
-from functions import reg_user#, view_edit_task#,load_tasks, update_task_status, marked_task#, get_tasks_file 
+from functions import reg_user
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
@@ -38,7 +38,6 @@ for t_str in task_data:
     curr_t['completed'] = True if task_components[5] == "Yes" else False
 
     task_list.append(curr_t)
-# print(f"ORIGINAL TASK LIST: {task_list}")
 
 #====Login Section====
 '''This code reads usernames and password from the user.txt file to 
