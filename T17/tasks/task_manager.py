@@ -198,7 +198,6 @@ while True:
            format of Output 2 presented in the task pdf (i.e. includes spacing
            and labelling)
         '''
-      
         # Display all tasks
         curr_user_task_list = []
         for i,t in enumerate(task_list):
@@ -217,7 +216,7 @@ while True:
                     disp_str += f"Assigned to: \t\t {t['username'].capitalize()}\n"
                     disp_str += f"Date Assigned: \t\t {t['assigned_date']}\n"
                     disp_str += f"Due Date: \t\t {t['due_date']}\n"
-                    disp_str += f"Completed: \t {'Yes' if t['completed'] else 'No'}\n" # <-- Missing
+                    disp_str += f"Completed: \t {'Yes' if t['completed'] else 'No'}\n"
                     disp_str += f"Task Description: \n {t['description']}\n"
                     print(f"{disp_str}")
                     curr_user_task_list.append(t)
@@ -225,7 +224,15 @@ while True:
         num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
 
         while True:
-            specific_task = input('''Select one of the following options below:
+            if len(num_of_index) == 0:
+                specific_task = input('''You have no task.\n\nSelect one of the following options below:
+    -1 - Return to the main menu
+    : ''').lower()
+                if specific_task != "-1":
+                    print("\nMain menu.")
+                    break
+            else:
+                specific_task = input('''Select one of the following options below:
     -1 - Return to the main menu
     tc - Mark the task as complete
     et - Edit the task
@@ -261,16 +268,13 @@ while True:
                 try:
                     task_num = int(task_num)
                     if task_num < 1 or task_num > len(num_of_index):
-                        print("Invalid task number. Please enter a valid task number.\n")
+                        print("Invalid task number. Please enter a valid task number.")
                         break
                 except ValueError:
-                    print("Invalid input. Please enter a valid task number.\n")
+                    print("Invalid input. Please enter a valid task number.")
                     break
 
                 selected_task = curr_user_task_list[task_num - 1]
-
-                task_list_to_complete = []
-                str_attrs = []
 
                 for t in task_list_txt:
                     if selected_task["username"] == t["username"] and selected_task["title"] == t["title"] and t["completed"]:
