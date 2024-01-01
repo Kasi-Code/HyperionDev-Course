@@ -32,11 +32,40 @@ def selecting_task_num(num_of_index):
         task_num = int(task_num)
         if task_num < 1 or task_num > len(num_of_index):
             print("Invalid task number. Please enter a valid task number.")
-            return 0
+            return False
         else:
             return task_num
     except ValueError:
         print("Invalid input. Please enter a valid task number.")
-        return 0
+        return False
 
-    
+def selecting_username(names):
+
+    split_name_str = [n.replace(";", " ") for n in names]
+    username_and_pass = [n.split(";") for n in names]
+    username_only = [n[0] for n in username_and_pass]
+
+    # print(f"1: {username_and_pass}")
+    # print(f"2: {username_only}")
+
+    all_user_names = {}
+    for i, n in enumerate(split_name_str):
+        all_user_names[i + 1] = n
+
+    # Print dictionary items horizontally
+    all_user_names = ", ".join(f"{key}: {value}" for key, value in all_user_names.items())
+    username = input(f"Username: {all_user_names.replace(":", ")")}\n\nSelect the index to assign to the Username: ")
+    print()
+
+    return int(username) 
+
+    # try:
+    #     username = int(username)
+    #     if username < 1 or username > len(names):
+    #         print("Invalid name index. Please enter a valid name index.")
+    #         return 0
+    #     else:
+    #         return username
+    # except ValueError:
+    #     print("Invalid input. Please enter a valid nane index.")
+    #     return 0
