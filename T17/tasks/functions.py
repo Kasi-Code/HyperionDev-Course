@@ -22,3 +22,21 @@ def reg_user(input_name):
             return False
         else:
             return input_name
+            
+def selecting_task_num(num_of_index):
+
+    task_num = input(f"\nTask: {', '.join(map(str, num_of_index))}\n\nSelect task number: ")
+    print()
+
+    try:
+        task_num = int(task_num)
+        if task_num < 1 or task_num > len(num_of_index):
+            print("Invalid task number. Please enter a valid task number.")
+            return 0
+        else:
+            return task_num
+    except ValueError:
+        print("Invalid input. Please enter a valid task number.")
+        return 0
+
+    

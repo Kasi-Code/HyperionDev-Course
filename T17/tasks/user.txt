@@ -1,6 +1,6 @@
 admin;password
 kasi;nram
-ka;nm
+ka;na
 helen;k
 Brithney;s
 ayumi;h

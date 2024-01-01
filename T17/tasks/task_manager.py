@@ -10,7 +10,7 @@ import copy, re, os
 from datetime import datetime, date
 
 # Functions created in different file: minimal code - easy for read
-from functions import reg_user
+from functions import reg_user, selecting_task_num
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
@@ -174,7 +174,7 @@ while True:
                 ]
                 task_list_to_write.append(";".join(str_attrs))
             task_file.write("\n".join(task_list_to_write))
-        print("Task successfully added.")
+        print("\nTask successfully added.")
 
     elif menu == 'va':
         '''Reads the task from task.txt file and prints to the console in the 
@@ -207,7 +207,7 @@ while True:
                     disp_str += f"Assigned to: \t\t {t['username'].capitalize()}\n"
                     disp_str += f"Date Assigned: \t\t {t['assigned_date'].strftime(DATETIME_STRING_FORMAT)}\n"
                     disp_str += f"Due Date: \t\t {t['due_date'].strftime(DATETIME_STRING_FORMAT)}\n"
-                    disp_str += f"Completed: \t {'Yes' if t['completed'] else 'No'}\n" # <-- Missing
+                    disp_str += f"Completed: \t\t {'Yes' if t['completed'] else 'No'}\n" # <-- Missing
                     disp_str += f"Task Description: \n {t['description']}\n"
                     print(f"{disp_str}")
                     curr_user_task_list.append(t)
@@ -216,7 +216,7 @@ while True:
                     disp_str += f"Assigned to: \t\t {t['username'].capitalize()}\n"
                     disp_str += f"Date Assigned: \t\t {t['assigned_date']}\n"
                     disp_str += f"Due Date: \t\t {t['due_date']}\n"
-                    disp_str += f"Completed: \t {'Yes' if t['completed'] else 'No'}\n"
+                    disp_str += f"Completed: \t\t {'Yes' if t['completed'] else 'No'}\n"
                     disp_str += f"Task Description: \n {t['description']}\n"
                     print(f"{disp_str}")
                     curr_user_task_list.append(t)
@@ -238,76 +238,118 @@ while True:
     et - Edit the task
     : ''').lower()
             
-            with open("tasks.txt", "r+") as task_file:
-                task_lines = task_file.readlines()
+                with open("tasks.txt", "r+") as task_file:
+                    task_lines = task_file.readlines()
 
-                task_list_txt = []
-                task_components_txt = []
-                for line in task_lines:
-                    
-                    all_t = {}
-
-                    # Split by semicolon and manually add each component
-                    task_components_txt = line.strip().split(";")
-                    all_t['username'] = task_components_txt[0]
-                    all_t['title'] = task_components_txt[1]
-                    all_t['description'] = task_components_txt[2]
-                    all_t['due_date'] = task_components_txt[3]
-                    all_t['assigned_date'] = task_components_txt[4]
-                    all_t['completed'] = True if task_components_txt[5].strip() == "Yes" else False
-
-                    task_list_txt.append(all_t)
-
-            selected_task = {}
-            if specific_task == "-1":
-                break
-            elif specific_task == "tc":
-                task_num = input(f"""\nTask: {', '.join(map(str, num_of_index))}.\n\nWhich task have you completed? """)
-                print()
-
-                try:
-                    task_num = int(task_num)
-                    if task_num < 1 or task_num > len(num_of_index):
-                        print("Invalid task number. Please enter a valid task number.")
-                        break
-                except ValueError:
-                    print("Invalid input. Please enter a valid task number.")
-                    break
-
-                selected_task = curr_user_task_list[task_num - 1]
-
-                for t in task_list_txt:
-                    if selected_task["username"] == t["username"] and selected_task["title"] == t["title"] and t["completed"]:
-                        print(f"Task {task_num} is already completed.\n")
-                        break
-                    elif selected_task["username"] == t["username"] and selected_task["title"] == t["title"] and not t["completed"]:
-                        answer = input(f"NOTE: You will not be able to edit this task once marked as completed! \n\nMark task {task_num} as complete? (Y / N): ").lower()
-                        if answer == "y":
-                            t['completed'] = True  # Update the task status in the list
-                            print(f"\nTask {task_num} marked as complete.")
-                            print()
-                            break
-                        elif answer == "n":
-                            print(f"\nTask {task_num} not marked as complete.")
-                            print()
-                            break
-                        else:
-                            print("Invalid input. Please enter 'Y' or 'N'.")
-                            print()
-                            break
-                else:
-                    # The 'else' block will only be executed if the 'for' loop completes without encountering a 'break'
-                    print(f"Task {task_num} not found.")
-
-                # After processing the changes, write the updated list back to the tasks.txt file
-                with open("tasks.txt", "w") as task_file:
-                    for t in task_list_txt:
-                        task_file.write(f"{t['username']};{t['title']};{t['description']};{t['due_date']};{t['assigned_date']};{'Yes' if t['completed'] else 'No'}\n")
-
-                # Refresh curr_user_task_list after marking a task as complete
-                task_list = [t for t in task_list_txt if t['username'] == curr_user]
-                num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
+                    task_list_txt = []
+                    task_components_txt = []
+                    for line in task_lines:
                         
+                        all_t = {}
+
+                        # Split by semicolon and manually add each component
+                        task_components_txt = line.strip().split(";")
+                        all_t['username'] = task_components_txt[0]
+                        all_t['title'] = task_components_txt[1]
+                        all_t['description'] = task_components_txt[2]
+                        all_t['due_date'] = task_components_txt[3]
+                        all_t['assigned_date'] = task_components_txt[4]
+                        all_t['completed'] = True if task_components_txt[5].strip() == "Yes" else False
+
+                        task_list_txt.append(all_t)
+
+                selected_task = {}
+                if specific_task == "-1":
+                    break
+                elif specific_task == "tc":
+
+                    print(f"\nWhich task have you completed?")
+
+                    task_num = selecting_task_num(num_of_index)
+
+                    selected_task = curr_user_task_list[task_num - 1]
+
+                    for t in task_list_txt:
+                        if selected_task["username"] == t["username"] and selected_task["title"] == t["title"] and t["completed"]:
+                            print(f"Task {task_num} is already completed.\n")
+                            break
+                        elif selected_task["username"] == t["username"] and selected_task["title"] == t["title"] and not t["completed"]:
+                            answer = input(f"NOTE: You will not be able to edit this task once marked as completed! \n\nMark task {task_num} as complete? (Y / N): ").lower()
+                            if answer == "y":
+                                t['completed'] = True  # Update the task status in the list
+                                print(f"\nTask {task_num} marked as complete.")
+                                print()
+                                break
+                            elif answer == "n":
+                                print(f"\nTask {task_num} not marked as complete.")
+                                print()
+                                break
+                            else:
+                                print("Invalid input. Please enter 'Y' or 'N'.")
+                                print()
+                                break
+                    else:
+                        # The 'else' block will only be executed if the 'for' loop completes without encountering a 'break'
+                        print(f"Task {task_num} not found.")
+
+                    # After processing the changes, write the updated list back to the tasks.txt file
+                    with open("tasks.txt", "w") as task_file:
+                        for t in task_list_txt:
+                            task_file.write(f"{t['username']};{t['title']};{t['description']};{t['due_date']};{t['assigned_date']};{'Yes' if t['completed'] else 'No'}\n")
+
+                    # Refresh curr_user_task_list after marking a task as complete
+                    task_list = [t for t in task_list_txt if t['username'] == curr_user]
+                    num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
+                elif specific_task == "et":
+                    selected_edit_option = input('''\nEditing task...\n\nSelect one of the following options below:
+        -1 - Return to the main menu
+        dn - Assign task to different name
+        dd - Change the due date
+        : ''').lower()
+                    
+                    if selected_edit_option == "-1":
+                        break
+                    elif selected_edit_option == "dn":
+
+                        print(f"\nWhat name would you like to re-assigned the task to?")
+
+                        task_num = selecting_task_num(num_of_index)
+
+                        selected_task = curr_user_task_list[task_num - 1]
+
+                        for t in task_list_txt:
+                            if selected_task["username"] == t["username"] and selected_task["title"] == t["title"] and t["completed"]:
+                                print(f"Task {task_num} is already completed.\n")
+                                break
+                            elif selected_task["username"] == t["username"] and selected_task["title"] == t["title"] and not t["completed"]:
+                                answer = input(f"NOTE: You will not be able to edit this task once marked as completed! \n\nMark task {task_num} as complete? (Y / N): ").lower()
+                                if answer == "y":
+                                    t['completed'] = True  # Update the task status in the list
+                                    print(f"\nTask {task_num} marked as complete.")
+                                    print()
+                                    break
+                                elif answer == "n":
+                                    print(f"\nTask {task_num} not marked as complete.")
+                                    print()
+                                    break
+                                else:
+                                    print("Invalid input. Please enter 'Y' or 'N'.")
+                                    print()
+                                    break
+                        else:
+                            # The 'else' block will only be executed if the 'for' loop completes without encountering a 'break'
+                            print(f"Task {task_num} not found.")
+
+                        # After processing the changes, write the updated list back to the tasks.txt file
+                        with open("tasks.txt", "w") as task_file:
+                            for t in task_list_txt:
+                                task_file.write(f"{t['username']};{t['title']};{t['description']};{t['due_date']};{t['assigned_date']};{'Yes' if t['completed'] else 'No'}\n")
+
+                        # Refresh curr_user_task_list after marking a task as complete
+                        task_list = [t for t in task_list_txt if t['username'] == curr_user]
+                        num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
+                        
+                            
     elif menu == 'ds' and curr_user == 'admin': 
         '''If the user is an admin they can display statistics about number of users
             and tasks.'''
