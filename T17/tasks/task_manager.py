@@ -83,13 +83,13 @@ while True:
     # making sure that the user input is converted to lower case.
     print()
     menu = input('''Select one of the following Options below:
-    r - Registering a user
-    a - Adding a task
-    va - View all tasks
-    vm - View my task
-    ds - Display statistics
-    e - Exit
-    : ''').lower()
+  r - Registering a user
+  a - Adding a task
+  va - View all tasks
+  vm - View my task
+  ds - Display statistics
+  e - Exit
+  : ''').lower()
     print()
 
     if menu == 'r':
@@ -320,7 +320,6 @@ while True:
                     if selected_edit_option == "-1":
                         break
                     elif selected_edit_option == "at":
-                        # curr_user_name_list = [n for n in curr_user_task_list["username"]]
 
                         print(f"\nWhich task would you like to re-assigned the name?")
 
@@ -331,7 +330,7 @@ while True:
                         else:                              
                             selected_task = curr_user_task_list[task_num - 1]
                             if selected_task["completed"]:
-                              print(f"\nCan't edit task {task_num} because it's already completed.\n")
+                              print(f"Can't edit task {task_num} because it's already completed.\n")
                               selected_task = False
                             else:
                               selected_name = selecting_username(user_data)
