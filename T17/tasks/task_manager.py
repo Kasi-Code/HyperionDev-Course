@@ -231,7 +231,7 @@ while True:
                 specific_task = input('''You have no task.\n\nSelect one of the following options below:
     -1 - Return to the main menu
     : ''').lower()
-                if specific_task != "-1":
+                if specific_task != "-1" or specific_task == "-1":
                     print("\nMain menu.")
                     break
             else:
@@ -310,6 +310,7 @@ while True:
                     # Refresh curr_user_task_list after marking a task as complete
                     task_list = [t for t in task_list_txt if t['username'] == curr_user]
                     num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
+
                 elif specific_task == "et":
                     selected_edit_option = input('''\nEditing task...\n\nSelect one of the following options below:
         -1 - Return to the main menu
@@ -342,7 +343,7 @@ while True:
                                 break
                             elif selected_task["username"] == t["username"] and selected_task["title"] == t["title"]:
                                 t["username"] = selected_name_value  # Update the task username in the list
-                                print(f"\nTask {task_num} assigned to {selected_name_value}.\n")
+                                print(f"\nTask {task_num} assigned to {selected_name_value}.")
                                 break
                         else:
                             # The 'else' block will only be executed if the 'for' loop completes without encountering a 'break'
@@ -353,11 +354,11 @@ while True:
                             for t in task_list_txt:
                                 task_file.write(f"{t['username']};{t['title']};{t['description']};{t['due_date']};{t['assigned_date']};{'Yes' if t['completed'] else 'No'}\n")
 
-                        # Refresh curr_user_task_list after marking a task as complete
-                        task_list = [t for t in task_list_txt if t['username'] == curr_user]
-                        num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
-
-
+                    # Refresh curr_user_task_list after marking a task as complete
+                    task_list = [t for t in task_list_txt if t['username'] == curr_user]
+                    num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
+                    break
+                
     elif menu == 'ds' and curr_user == 'admin': 
         '''If the user is an admin they can display statistics about number of users
             and tasks.'''
