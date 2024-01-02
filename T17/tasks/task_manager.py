@@ -240,14 +240,14 @@ while True:
     tc - Mark the task as complete
     et - Edit the task
     : ''').lower()
-            
+
                 with open("tasks.txt", "r+") as task_file:
                     task_lines = task_file.readlines()
 
                     task_list_txt = []
                     task_components_txt = []
                     for line in task_lines:
-                        
+
                         all_t = {}
 
                         # Split by semicolon and manually add each component
@@ -269,7 +269,7 @@ while True:
                     print(f"\nWhich task have you completed?")
 
                     task_num = selecting_task_num(num_of_index)
-                    
+
                     if task_num is False:
                         selected_task = False
                     else:
@@ -316,12 +316,10 @@ while True:
         at - Assign task to different name
         dd - Change the due date
         : ''').lower()
-                    
+
                     if selected_edit_option == "-1":
                         break
                     elif selected_edit_option == "at":
-
-                        
                         # curr_user_name_list = [n for n in curr_user_task_list["username"]]
 
                         print(f"\nWhich task would you like to re-assigned the name?")
@@ -330,35 +328,23 @@ while True:
 
                         if task_num is False:
                             selected_task = False
-                        else:
-                            selected_name = selecting_username(user_data)
-
-                        # if task_num is False:
-                        #     selected_task = False
-                        # else:
-                        #     selected_task = curr_user_task_list[task_num - 1]
+                        else:                              
+                            selected_task = curr_user_task_list[task_num - 1]
+                            if selected_task["completed"]:
+                              print(f"\nCan't edit task {task_num} because it's already completed.\n")
+                              selected_task = False
+                            else:
+                              selected_name = selecting_username(user_data)
+                              selected_name_value = selected_name["name"]
+                              # print(selected_name["name"])
 
                         for t in task_list_txt:
                             if selected_task == False:
                                 break
-                            elif selected_name["username"] == t["username"] and selected_name["title"] == t["title"] and t["completed"]:
-                                print(f"Task {task_num} is already completed.\n")
+                            elif selected_task["username"] == t["username"] and selected_task["title"] == t["title"]:
+                                t["username"] = selected_name_value  # Update the task username in the list
+                                print(f"\nTask {task_num} assigned to {selected_name_value}.\n")
                                 break
-                            elif selected_name["username"] == t["username"] and selected_name["title"] == t["title"] and not t["completed"]:
-                                answer = input(f"NOTE: You will not be able to edit this task once marked as completed! \n\nMark task {task_num} as complete? (Y / N): ").lower()
-                                if answer == "y":
-                                    t['completed'] = True  # Update the task status in the list
-                                    print(f"\nTask {task_num} marked as complete.")
-                                    print()
-                                    break
-                                elif answer == "n":
-                                    print(f"\nTask {task_num} not marked as complete.")
-                                    print()
-                                    break
-                                else:
-                                    print("Invalid input. Please enter 'Y' or 'N'.")
-                                    print()
-                                    break
                         else:
                             # The 'else' block will only be executed if the 'for' loop completes without encountering a 'break'
                             print(f"Task {task_num} not found.")
@@ -371,8 +357,8 @@ while True:
                         # Refresh curr_user_task_list after marking a task as complete
                         task_list = [t for t in task_list_txt if t['username'] == curr_user]
                         num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
-                        
-                            
+
+
     elif menu == 'ds' and curr_user == 'admin': 
         '''If the user is an admin they can display statistics about number of users
             and tasks.'''

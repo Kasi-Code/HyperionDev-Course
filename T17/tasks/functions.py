@@ -22,7 +22,7 @@ def reg_user(input_name):
             return False
         else:
             return input_name
-            
+
 def selecting_task_num(num_of_index):
 
     task_num = input(f"\nTask: {', '.join(map(str, num_of_index))}\n\nSelect task number: ")
@@ -34,7 +34,7 @@ def selecting_task_num(num_of_index):
             print("Invalid task number. Please enter a valid task number.")
             return False
         else:
-            return task_num
+            return int(task_num)
     except ValueError:
         print("Invalid input. Please enter a valid task number.")
         return False
@@ -46,18 +46,20 @@ def selecting_username(names):
     username_only = [n[0] for n in username_and_pass]
 
     # print(f"1: {username_and_pass}")
-    # print(f"2: {username_only}")
+    # print(f"2: {username_only[1]}")
 
     all_user_names = {}
     for i, n in enumerate(split_name_str):
         all_user_names[i + 1] = n
 
+    index_and_name = {}
     # Print dictionary items horizontally
     all_user_names = ", ".join(f"{key}: {value}" for key, value in all_user_names.items())
-    username = input(f"Username: {all_user_names.replace(":", ")")}\n\nSelect the index to assign to the Username: ")
-    print()
+    selected_user_index = int(input(f"Users: {all_user_names.replace(':', '.')}\n\nRe-assign to which user? Select the index number: ")) 
+    selected_name = {"name" : username_only[selected_user_index - 1]}
+    # print(index_and_name)
 
-    return int(username) 
+    return selected_name
 
     # try:
     #     username = int(username)
