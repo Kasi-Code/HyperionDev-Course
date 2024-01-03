@@ -1,11 +1,13 @@
-helen;Add functionality to task manager;Add additional options and refactor the code.;2022-12-01;2022-11-22;No
-kasi;Complete vm.;sencond task from T17.;2013-12-12;2023-12-12;No
-kasi;need to move on to the next task.;next.;2023-12-13;2023-12-12;No
-admin;test test;etstedd;2023-12-12;2023-12-12;No
-kasi;fgiurosdcd;ocvpfjdos;2024-03-12;2023-12-12;No
-kasi;Test due date arrangement 1;due date;2030-12-01;2023-12-15;No
-kasi;test due date 2;duedate;2012-11-03;2023-12-15;No
-kasi;test due date 3;test test;2029-01-24;2023-12-15;No
-admin;move on to the next bits please!!;move move move;2024-01-12;2023-12-19;No
-admin;wertyujhgfdf;dvbhuy6t5rertg;2012-02-04;2023-12-19;No
-ka;First task for Ka;for edit;2012-01-01;2024-01-01;Yes
+Helen;Add functionality to task manager;Add additional options and refactor the code.;2022-12-01;2022-11-22;Yes
+Kasi;Complete vm.;sencond task from T17.;2013-12-12;2023-12-12;No
+Kasi;need to move on to the next task.;next.;2023-12-13;2023-12-12;No
+Admin;test test;etstedd;2023-12-12;2023-12-12;No
+Kasi;fgiurosdcd;ocvpfjdos;2024-03-12;2023-12-12;No
+Kasi;Test due date arrangement 1;due date;2030-12-01;2023-12-15;No
+Kasi;test due date 2;duedate;2012-11-03;2023-12-15;No
+Kasi;test due date 3;test test;2029-01-24;2023-12-15;No
+Admin;move on to the next bits please!!;move move move;2024-01-12;2023-12-19;No
+Admin;wertyujhgfdf;dvbhuy6t5rertg;1989-01-02;2023-12-19;Yes
+Ka;First task for Ka;for edit;2012-01-01;2024-01-01;Yes
+Helen;PASS IT;ON;2024-01-05;2024-01-03;No
+Ayumi;NEXT;ON NEXT;1999-3-5;2024-01-03;No

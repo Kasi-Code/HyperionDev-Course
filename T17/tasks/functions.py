@@ -39,7 +39,7 @@ def selecting_task_num(num_of_index):
     else:
       return int(task_num)
   except ValueError:
-    print("Invalid input. Please enter a valid task number.\n")
+    print("Invalid input. Please enter a valid task number.")
     return False
 
 
@@ -62,20 +62,8 @@ def selecting_username(names):
                              for key, value in all_user_names.items())
   selected_user_index = int(
       input(
-          f"Users: {all_user_names.replace(':', '.')}\n\nRe-assign to which user? Select the index number: "
+          f"Users: {all_user_names.replace(': ', '.')}\n\nRe-assign to which user? Select the index number: "
       ))
   selected_name = {"name": username_only[selected_user_index - 1]}
-  # print(index_and_name)
 
   return selected_name
-
-  # try:
-  #     username = int(username)
-  #     if username < 1 or username > len(names):
-  #         print("Invalid name index. Please enter a valid name index.")
-  #         return 0
-  #     else:
-  #         return username
-  # except ValueError:
-  #     print("Invalid input. Please enter a valid nane index.")
-  #     return 0

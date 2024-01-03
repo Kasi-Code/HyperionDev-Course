@@ -65,7 +65,7 @@ logged_in = False
 while not logged_in:
 
     print("LOGIN")
-    curr_user = input("Username: ")
+    curr_user = str(input("Username: ")).capitalize()
     curr_pass = input("Password: ")
     if curr_user not in username_password.keys():
         print("User does not exist")
@@ -75,7 +75,7 @@ while not logged_in:
         continue
     else:
         print("Login Successful!")
-        print(f"\nHello {curr_user.capitalize()}!")
+        print(f"\nHello {curr_user}!")
         logged_in = True
 
 while True:
@@ -87,6 +87,7 @@ while True:
   a - Adding a task
   va - View all tasks
   vm - View my task
+  gr - Generate report
   ds - Display statistics
   e - Exit
   : ''').lower()
@@ -96,7 +97,7 @@ while True:
         while True: # <-- Added loop
             '''Add a new user to the user.txt file'''
             # - Request input of a new username
-            new_username = input("New Username: ")
+            new_username = str(input("New Username: ")).capitalize()
 
             new_username = reg_user(new_username) # <-- deployed function
 
@@ -113,7 +114,7 @@ while True:
             # - Check if the new password and confirmed password are the same.
             if new_password == confirm_password:
                 # - If they are the same, add them to the user.txt file,
-                print("New user added")
+                print(f"\nNew user {new_username} added.")
                 username_password[new_username] = new_password
 
                 with open("user.txt", "w") as out_file:
@@ -127,6 +128,7 @@ while True:
             else:
                 print("Passwords do no match")
 
+  
     elif menu == 'a':
         '''Allow a user to add a new task to task.txt file
             Prompt a user for the following: 
@@ -148,7 +150,6 @@ while True:
 
             except ValueError:
                 print("Invalid datetime format. Please use the format specified")
-
 
         # Then get the current date.
         curr_date = date.today()
@@ -179,6 +180,7 @@ while True:
             task_file.write("\n".join(task_list_to_write))
         print("\nTask successfully added.")
 
+  
     elif menu == 'va':
         '''Reads the task from task.txt file and prints to the console in the 
            format of Output 2 presented in the task pdf (i.e. includes spacing
@@ -195,7 +197,7 @@ while True:
             disp_str += f"Task Description: \n {t['description']}\n"
             print(disp_str)
 
-
+  
     elif menu == 'vm':
         '''Reads the task from task.txt file and prints to the console in the 
            format of Output 2 presented in the task pdf (i.e. includes spacing
@@ -265,11 +267,9 @@ while True:
                 if specific_task == "-1":
                     break
                 elif specific_task == "tc":
-
                     print(f"\nWhich task have you completed?")
 
                     task_num = selecting_task_num(num_of_index)
-
                     if task_num is False:
                         selected_task = False
                     else:
@@ -277,7 +277,7 @@ while True:
 
                     for t in task_list_txt:
                         if selected_task == False:
-                            print(f"\nTask not found.\n")
+                            print(f"Task not found.\n")
                             break
                         elif selected_task["username"] == t["username"] and selected_task["title"] == t["title"] and t["completed"]:
                             print(f"Task {task_num} is already completed.\n")
@@ -314,24 +314,22 @@ while True:
                 elif specific_task == "et":
                     selected_edit_option = input('''\nEditing task...\n\nSelect one of the following options below:
         -1 - Return to the main menu
-        at - Assign task to different name
+        at - Assign task to different user
         dd - Change the due date
         : ''').lower()
 
                     if selected_edit_option == "-1":
                         break
                     elif selected_edit_option == "at":
-
                         print(f"\nWhich task would you like to re-assigned the name?")
 
                         task_num = selecting_task_num(num_of_index)
-
                         if task_num is False:
                             selected_task = False
                         else:                              
                             selected_task = curr_user_task_list[task_num - 1]
                             if selected_task["completed"]:
-                              print(f"Can't edit task {task_num} because it's already completed.\n")
+                              print(f"Can't edit task {task_num} because it's already completed.")
                               selected_task = False
                             else:
                               selected_name = selecting_username(user_data)
@@ -353,13 +351,86 @@ while True:
                         with open("tasks.txt", "w") as task_file:
                             for t in task_list_txt:
                                 task_file.write(f"{t['username']};{t['title']};{t['description']};{t['due_date']};{t['assigned_date']};{'Yes' if t['completed'] else 'No'}\n")
+                    elif selected_edit_option == "dd":                      
+                        print(f"\nWhich task would you like to change the due date?")
+
+                        task_num = selecting_task_num(num_of_index)
+                        if task_num is False:
+                            selected_task = False
+                        else:                              
+                            selected_task = curr_user_task_list[task_num - 1]
+                            if selected_task["completed"]:                              
+                              print(f"Can't edit task {task_num} because it's already completed.")                              
+                              selected_task = False
+                            else:
+                              selected_task = curr_user_task_list[task_num - 1]
+            
+                              while True:
+                                try:
+                                    new_due_date = input(f"Enter the new due date for task {task_num} (YYYY-MM-DD): ")
+                                    due_date_time = datetime.strptime(new_due_date, DATETIME_STRING_FORMAT)
+                                    break
+
+                                except ValueError:
+                                    print("Invalid datetime format. Please use the format specified")
+
+                        for t in task_list_txt:
+                            if selected_task == False:
+                                break
+                            elif selected_task["username"] == t["username"] and selected_task["title"] == t["title"]:
+                                t["due_date"] = new_due_date                                
+                                print(f"\nTask {task_num} due date chnaged to {new_due_date}.")
+                              
+                                break
+                        else:
+                            # The 'else' block will only be executed if the 'for' loop completes without encountering a 'break'
+                            print(f"Task {task_num} not found.")
+
+                        # After processing the changes, write the updated list back to the tasks.txt file
+                        with open("tasks.txt", "w") as task_file:
+                            for t in task_list_txt:
+                                task_file.write(f"{t['username']};{t['title']};{t['description']};{t['due_date']};{t['assigned_date']};{'Yes' if t['completed'] else 'No'}\n")
+                    else:
+                        print()
+                        missed_options = True
+                      
+                        try:
+                          if missed_options:
+                            print("Invalid option. Please enter a valid optons.")
+                            break
+                        except ValueError:
+                          print("Invalid input. Please enter a valid options.\n")
+                          break
 
                     # Refresh curr_user_task_list after marking a task as complete
                     task_list = [t for t in task_list_txt if t['username'] == curr_user]
                     num_of_index = [i for i in range(1, len(curr_user_task_list) + 1)]
                     break
-                
-    elif menu == 'ds' and curr_user == 'admin': 
+
+  
+    # elif menu == "gr":        
+
+#         num_users = len(username_password.keys())
+#         num_tasks = len(task_list)
+      
+#         user_overview_file = open("user_overview.txt", "a")
+#             file.write(f"""The total number of task(s) genterated: {num_users}.
+# The total number of completed task(s): {num_users}.
+# The total number of uncompleted task(s): {num_users}.
+# The total number of uncompleted task(s) and overdue: {num_users}.
+# The percentage of task(s) that are incomplete is {num_tasks}.
+# The percentage of task(s) that are overdue is {num_tasks}.""")
+
+#             file.close()
+        
+      
+#         task_overview_file = open("task_overview.txt", "a")
+#             file.write(f"Student ID: {ID[i]} .................Sign\n")
+      
+#             file.close()
+        
+      
+    elif menu == 'ds' and curr_user == 'Admin': 
         '''If the user is an admin they can display statistics about number of users
             and tasks.'''
         num_users = len(username_password.keys())
@@ -369,6 +440,9 @@ while True:
         print(f"Number of users: \t\t {num_users}")
         print(f"Number of tasks: \t\t {num_tasks}")
         print("-----------------------------------")    
+
+    elif menu == 'ds' and curr_user != 'Admin':
+        print("Only Admin can select this option.")
 
     elif menu == 'e':
         print('Goodbye!!!')

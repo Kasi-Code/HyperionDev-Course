@@ -1,7 +1,7 @@
-admin;password
-kasi;nram
-ka;na
-helen;k
+Admin;password
+Kasi;nram
+Ka;na
+Helen;k
 Brithney;s
-ayumi;h
-k;n
+Ayumi;h
+K;n
