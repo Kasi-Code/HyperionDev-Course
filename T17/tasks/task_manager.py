@@ -408,27 +408,65 @@ while True:
                     break
 
   
-    # elif menu == "gr":        
+    elif menu == "gr" and curr_user == 'Admin':  
 
-#         num_users = len(username_password.keys())
-#         num_tasks = len(task_list)
-      
-#         user_overview_file = open("user_overview.txt", "a")
-#             file.write(f"""The total number of task(s) genterated: {num_users}.
-# The total number of completed task(s): {num_users}.
-# The total number of uncompleted task(s): {num_users}.
-# The total number of uncompleted task(s) and overdue: {num_users}.
-# The percentage of task(s) that are incomplete is {num_tasks}.
-# The percentage of task(s) that are overdue is {num_tasks}.""")
+        curr_date = date.today()
+        num_tasks = len(task_list)    
+        num_tasks_completed = 0
+        num_tasks_incomplete = 0
+        overdue_tasks = 0
+        uncompleted_and_overdue = 0
+        for v in task_list:
+            if v["completed"]:
+                num_tasks_completed += 1
 
-#             file.close()
+            if not v["completed"]:
+                num_tasks_incomplete += 1
+
+            due_date_datetime = v["due_date"]
+            due_date = due_date_datetime.date() 
+            if curr_date > due_date:
+                overdue_tasks += 1
+            
+            if not v["completed"] and curr_date > due_date:
+                uncompleted_and_overdue += 1
+
+        # print(num_tasks, num_tasks_completed, num_tasks_incomplete, overdue_tasks)
+        num_users = len(username_password.keys())
+        percent_of_incomplete = (num_tasks_incomplete / num_tasks) * 100 
+        percent_of_overdue = (overdue_tasks / num_tasks) * 100 
         
+        task_overview_file = open("task_overview.txt", "w+")
+        task_overview_file.write(f"""The Overview Report For Task: -
+                                 
+{num_tasks}\t- task(s) generated in total.
+{num_tasks_completed}\t- task(s) completed in total.
+{num_tasks_incomplete}\t- task(s) uncompleted in total.
+{uncompleted_and_overdue}\t- task(s) uncompleted and overdue in total.
+{round(percent_of_incomplete)}%\t- incomplete task(s) in total.
+{round(percent_of_overdue)}%\t- overdue task(s) in total.""")
       
-#         task_overview_file = open("task_overview.txt", "a")
-#             file.write(f"Student ID: {ID[i]} .................Sign\n")
+        task_overview_file.close()
+
+        # *NEXT TO DO!!!
       
-#             file.close()
-        
+        user_overview_file = open("user_overview.txt", "w+")
+        user_overview_file.write(f"""The Overview Report For User: -
+                                 
+{num_tasks}  - User(s) generated in total.
+{num_tasks}  - User(s) completed in total.
+{num_users}  - User(s) uncompleted in total.
+{num_users}  - User(s) uncompleted and overdue in total.
+{num_tasks}% - incomplete task(s) in total.
+{num_tasks}% - overdue task(s) in total.""")
+
+        user_overview_file.close()
+
+        print("<< Please see the Generated reports for 'user_overview' and 'task_overview' in the file. >>")
+    
+    elif menu == 'gr' and curr_user != 'Admin':
+        print("Only Admin can select this option.")
+
       
     elif menu == 'ds' and curr_user == 'Admin': 
         '''If the user is an admin they can display statistics about number of users
@@ -447,6 +485,7 @@ while True:
     elif menu == 'e':
         print('Goodbye!!!')
         exit()
+
 
     else:
         print("You have made a wrong choice, Please Try again")
