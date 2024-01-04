@@ -1,8 +1,9 @@
-The Overview Report For User: -
-                                 
-13  - User(s) generated in total.
-13  - User(s) completed in total.
-7  - User(s) uncompleted in total.
-7  - User(s) uncompleted and overdue in total.
-13% - incomplete task(s) in total.
-13% - overdue task(s) in total.
+The Overview Report For Kasi: -
+
+- 6 task(s) assigned to you in total.
+- 46% of the task(s) assigned to you in total.
+- 0% of the task(s) you completed in total.
+
+There are 7 user(s) registered in total.
+
+(Printed 2024-01-04)
