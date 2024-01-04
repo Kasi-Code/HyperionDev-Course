@@ -68,23 +68,3 @@ def selecting_username(names):
   selected_name = {"name": username_only[selected_user_index - 1]}
 
   return selected_name
-
-def update_list():
-  # Update task_list to match the latest data
-  with open("tasks.txt", "r") as task_file:
-      task_data = task_file.read().split("\n")
-      task_data = [t for t in task_data if t != ""]
-
-  task_list = []
-  for t_str in task_data:
-      curr_t = {}
-
-      task_components = t_str.split(";")
-      curr_t['username'] = task_components[0]
-      curr_t['title'] = task_components[1]
-      curr_t['description'] = task_components[2]
-      curr_t['due_date'] = datetime.strptime(task_components[3], DATETIME_STRING_FORMAT)
-      curr_t['assigned_date'] = datetime.strptime(task_components[4], DATETIME_STRING_FORMAT)
-      curr_t['completed'] = True if task_components[5] == "Yes" else False
-
-      task_list.append(curr_t)

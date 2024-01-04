@@ -1,3 +1,5 @@
+""" THAT WAS A DIAMOND CHALLENGE!!! 😭 """
+
 # Notes: 
 # 1. Use the following username and password to access the admin rights 
 # username: admin
@@ -10,7 +12,7 @@ import copy, re, os
 from datetime import datetime, date
 
 # Functions created in different file: minimal code - easy for read
-from functions import reg_user, selecting_task_num, selecting_username, update_list
+from functions import reg_user, selecting_task_num, selecting_username
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
