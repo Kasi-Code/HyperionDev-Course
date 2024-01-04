@@ -62,7 +62,8 @@ def selecting_username(names):
                              for key, value in all_user_names.items())
   selected_user_index = int(
       input(
-          f"Users: {all_user_names.replace(': ', '.')}\n\nreassigned to which user? Select the index number: "
+          f"Users: {all_user_names.replace(': ', '.')}"
+          f"\n\nreassigned to which user? Select the index number: "
       ))
   selected_name = {"name": username_only[selected_user_index - 1]}
 
