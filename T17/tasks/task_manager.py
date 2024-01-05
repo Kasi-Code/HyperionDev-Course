@@ -25,7 +25,6 @@ with open("tasks.txt", 'r') as task_file:
     task_data = task_file.read().split("\n")
     task_data = [t for t in task_data if t != ""]
 
-
 task_list = []
 for t_str in task_data:
     curr_t = {}
@@ -325,7 +324,7 @@ while True:
                     # break
 
                 elif specific_task == "et":
-                  
+
                     # Refresh curr_user_task_list for editing
                     curr_user_task_list = [t for t in task_list_txt if t['username'] == curr_user]
                     selected_edit_option = input('''\nEditing task...
@@ -556,8 +555,9 @@ There are {num_users} user(s) registered in total.
 
         print(
             """<< >> Generated reports << >> 
-Please see the in the file for
-'user_overview' and 'task_overview'."""
+Please find the files for
+'user_overview' and 'task_overview' 
+in the main folder."""
         )
 
     elif menu == 'ds' and curr_user == 'Admin': 

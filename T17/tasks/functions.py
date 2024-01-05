@@ -1,7 +1,6 @@
 import copy, re
 from datetime import datetime
 
-
 def reg_user(input_name):
   with open("user.txt", "r") as username_pass_list:
     user_contents = ""
@@ -24,7 +23,6 @@ def reg_user(input_name):
     else:
       return input_name
 
-
 def selecting_task_num(num_of_index):
 
   task_num = input(
@@ -42,7 +40,6 @@ def selecting_task_num(num_of_index):
     print("Invalid input. Please enter a valid task number.")
     return False
 
-
 def selecting_username(names):
 
   split_name_str = [n.replace(";", " ") for n in names]
@@ -59,7 +56,7 @@ def selecting_username(names):
   index_and_name = {}
   # Print dictionary items horizontally
   all_user_names = ", ".join(f"{key}: {value}"
-                             for key, value in all_user_names.items())
+  for key, value in all_user_names.items())
   selected_user_index = int(
       input(
           f"Users: {all_user_names.replace(': ', '.')}"
