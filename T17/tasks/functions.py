@@ -46,14 +46,10 @@ def selecting_username(names):
   username_and_pass = [n.split(";") for n in names]
   username_only = [n[0] for n in username_and_pass]
 
-  # print(f"1: {username_and_pass}")
-  # print(f"2: {username_only[1]}")
-
   all_user_names = {}
   for i, n in enumerate(split_name_str):
     all_user_names[i + 1] = n
 
-  index_and_name = {}
   # Print dictionary items horizontally
   all_user_names = ", ".join(f"{key}: {value}"
   for key, value in all_user_names.items())
