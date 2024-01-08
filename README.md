@@ -1,4 +1,4 @@
 # HyperionDev-Course
 Python
 
-5/1/24: Starting T18
+8/1/24: Starting T20
