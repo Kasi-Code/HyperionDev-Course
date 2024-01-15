@@ -7,11 +7,6 @@ calculator and a home loan repayment calculator."""
 
 import math
 
-# Repetition of words for this project.
-
-keyword_invest = "Investment"
-keyword_bond = "Bond"
-
 # The program will first greet the user and ask for their name. 
 # This will give a human touch. 
 # Then user will need to select their chioce to "invest" or "bond".
@@ -107,7 +102,7 @@ repaying each month, if the value of the house is £{house_value};
 with an interest of {input_interest}%; over {input_month} month(s).
 
     Total payment each month: £{repayment}
-    Total repayment £{total_repayment}\n"""
+    Total repayment: £{total_repayment}\n"""
 
         print(result)
 
