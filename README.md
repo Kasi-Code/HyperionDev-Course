@@ -1,4 +1,4 @@
 # HyperionDev-Course
 Python
 
-8/1/24: Starting T20
+15/1/24 - All challenges completed.
