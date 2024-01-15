@@ -28,21 +28,33 @@ used as an attendance register, which the students will sign when they arrive at
 # If letter, all will turned into (uppercase) and append to the list variable
 # second (for) loop will iterate through the (list) and appened to the (txt) file
 
-ID = []
+student_id = []
 
 file = open("reg_form.txt", "a")
+num_of_student = int(input(
+    "\nHow many students are registering? "
+    ))
 
-num_of_student = int(input("How many students are registering? "))
+print()
 
-for id in range(num_of_student):
+while True:
 
-    student_id = (input("Please enter the student ID number: ")).upper()
-    ID.append(student_id)
+    print(f"Please enter the student ID {num_of_student} times.\n")
 
-print(ID)
+    for id in range(num_of_student):
+        entered_id = (input(
+            "Please enter the student ID number: "
+            )).upper()
+        student_id.append(entered_id)
 
-for i in range(len(ID)):
+    print(f"""\nThese are the new student ID you've entered: 
+{', '.join(student_id)}
 
-    file.write(f"Student ID: {ID[i]} .................Sign\n")
+Please see the (reg_form.txt) for the results.\n""")
 
-file.close()
+    for i in range(len(student_id)):
+        file.write(
+            f"Student ID: {student_id[i]} \t" 
+            "................Sign\n")
+    file.close()
+    break

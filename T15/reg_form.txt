@@ -1,3 +1,12 @@
+List of students:
+
 Student ID: 23456 .................Sign
 Student ID: 234G .................Sign
 Student ID: 234GDS221 .................Sign
+Student ID: 12345HGFD .................Sign
+Student ID: 345BVC .................Sign
+
+New results
+
+Student ID: 1234JHY 	................Sign
+Student ID: 4321VG2 	................Sign
