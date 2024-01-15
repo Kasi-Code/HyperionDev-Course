@@ -43,11 +43,11 @@ while True:
 
     for id in range(num_of_student):
         entered_id = (input(
-            "Please enter the student ID number: "
+            "Enter the ID number: "
             )).upper()
         student_id.append(entered_id)
 
-    print(f"""\nThese are the new student ID you've entered: 
+    print(f"""\nThe student ID(s) you've entered: 
 {', '.join(student_id)}
 
 Please see the (reg_form.txt) for the results.\n""")
