@@ -39,7 +39,7 @@ print()
 
 while True:
 
-    print(f"Please enter the student ID {num_of_student} times.\n")
+    print(f"Please enter the student ID {num_of_student} time(s).\n")
 
     for id in range(num_of_student):
         entered_id = (input(
