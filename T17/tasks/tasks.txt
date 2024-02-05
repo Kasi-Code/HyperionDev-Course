@@ -7,7 +7,7 @@ Kasi;Complete CV.;Do it later.;2030-12-01;2023-12-15;Yes
 Kasi;Setup Linkin.;When all tasks are done.;2012-11-03;2023-12-15;Yes
 Kasi;Have you submitted all the tasks?;You'll be fine.;2029-01-24;2023-12-15;No
 Admin;Listen to music helps you.;Music keeps you inspired.;2000-01-01;2023-12-19;Yes
-Admin;Are all tasks completed?;Check status.;1989-01-02;2023-12-19;No
+Admin;Are all tasks completed?;Check status.;1989-01-02;2023-12-19;Yes
 Ka;Have you clean your room?;Hoover and dust.;2012-01-01;2024-01-01;No
 Helen;Have you done anything good towards others?;For sanity.;2024-01-05;2024-01-03;No
 Ayumi;Have you listen to you fav song?;How many?;1999-03-05;2024-01-03;No

@@ -555,6 +555,7 @@ There are {num_users} user(s) registered in total.
 
         print(
             """<< >> Generated reports << >> 
+            
 Please find the files for
 'user_overview' and 'task_overview' 
 in the main folder."""
