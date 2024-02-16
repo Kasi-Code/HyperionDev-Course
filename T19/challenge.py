@@ -46,7 +46,6 @@ def remove_suffix_ness(word):
     if char in consonant: 
         removed_suffix = word.replace(
             char, "y").replace(suffix, "")
-        # removed_suffix = replaced_consonant.replace(suffix, "")
         print(removed_suffix)
     else:
         removed_suffix = word.replace(suffix, "")
