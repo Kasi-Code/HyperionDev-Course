@@ -1,39 +1,39 @@
 The Overview Report For Admin: 
-    - 3 task(s) assigned to you in total.
-    - 18% of the task(s) assigned to you in total.
-    - 100% of the task(s) you completed in total.
+    - 3 tasks assigned to you in total.
+    - 18% of the tasks assigned to you in total.
+    - 100% of the tasks you completed in total.
 
 The Overview Report For Kasi: 
-    - 6 task(s) assigned to you in total.
-    - 35% of the task(s) assigned to you in total.
-    - 67% of the task(s) you completed in total.
+    - 6 tasks assigned to you in total.
+    - 35% of the tasks assigned to you in total.
+    - 67% of the tasks you completed in total.
 
 The Overview Report For Ka: 
-    - 1 task(s) assigned to you in total.
-    - 6% of the task(s) assigned to you in total.
-    - 0% of the task(s) you completed in total.
+    - 1 task assigned to you in total.
+    - 6% of the task assigned to you in total.
+    - 0% of the task you completed in total.
 
 The Overview Report For Helen: 
-    - 2 task(s) assigned to you in total.
-    - 12% of the task(s) assigned to you in total.
-    - 0% of the task(s) you completed in total.
+    - 2 tasks assigned to you in total.
+    - 12% of the tasks assigned to you in total.
+    - 0% of the tasks you completed in total.
 
 The Overview Report For Brithney: 
-    - 0 task(s) assigned to you in total.
-    - 0% of the task(s) assigned to you in total.
-    - 0% of the task(s) you completed in total.
+    - 0 task assigned to you in total.
+    - 0% of the task assigned to you in total.
+    - 0% of the task you completed in total.
 
 The Overview Report For Ayumi: 
-    - 2 task(s) assigned to you in total.
-    - 12% of the task(s) assigned to you in total.
-    - 0% of the task(s) you completed in total.
+    - 2 tasks assigned to you in total.
+    - 12% of the tasks assigned to you in total.
+    - 0% of the tasks you completed in total.
 
 The Overview Report For K: 
-    - 3 task(s) assigned to you in total.
-    - 18% of the task(s) assigned to you in total.
-    - 33% of the task(s) you completed in total.
+    - 3 tasks assigned to you in total.
+    - 18% of the tasks assigned to you in total.
+    - 33% of the tasks you completed in total.
 
 
-There are 7 user(s) registered in total.
+There are {num_users} users registered in total.
 
-(Printed 2024-02-16)
+(Printed 2024-02-18)
